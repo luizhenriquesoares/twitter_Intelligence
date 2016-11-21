@@ -95,7 +95,7 @@
     <readurl>N</readurl>
     <removeSourceField>N</removeSourceField>
     <IsIgnoreEmptyFile>N</IsIgnoreEmptyFile>
-    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <doNotFailIfNoFile>N</doNotFailIfNoFile>
     <ignoreMissingPath>N</ignoreMissingPath>
     <defaultPathLeafToNull>N</defaultPathLeafToNull>
     <rownum_field/>
@@ -108,22 +108,9 @@
     </file>
     <fields>
       <field>
-        <name>created_at</name>
-        <path>&#x24;.statuses..created_at</path>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>text</name>
-        <path>&#x24;.statuses..text</path>
-        <type>String</type>
+        <name>name</name>
+        <path>&#x24;.statuses.&#x2a;.user..name</path>
+        <type>None</type>
         <format/>
         <currency/>
         <decimal/>
@@ -198,7 +185,7 @@
 
     <mongo_fields>
       <mongo_field>
-         <incoming_field_name>created_at</incoming_field_name>
+         <incoming_field_name>name</incoming_field_name>
 
          <mongo_doc_path/>
 
@@ -208,25 +195,7 @@
 
          <modifier_update_operation>N&#x2f;A</modifier_update_operation>
 
-         <modifier_policy>Insert&#x26;Update</modifier_policy>
-
-         <json_field>N</json_field>
-
-         <allow_null>N</allow_null>
-
-      </mongo_field>
-      <mongo_field>
-         <incoming_field_name>text</incoming_field_name>
-
-         <mongo_doc_path/>
-
-         <use_incoming_field_name_as_mongo_field_name>Y</use_incoming_field_name_as_mongo_field_name>
-
-         <update_match_field>N</update_match_field>
-
-         <modifier_update_operation>N&#x2f;A</modifier_update_operation>
-
-         <modifier_policy>Insert&#x26;Update</modifier_policy>
+         <modifier_policy/>
 
          <json_field>N</json_field>
 
