@@ -277,7 +277,7 @@
     </data>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>176</xloc>
+      <xloc>112</xloc>
       <yloc>128</yloc>
       <draw>Y</draw>
       </GUI>
@@ -390,7 +390,7 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>624</xloc>
+      <xloc>688</xloc>
       <yloc>128</yloc>
       <draw>Y</draw>
       </GUI>
