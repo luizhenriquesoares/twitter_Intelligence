@@ -75,35 +75,11 @@
   <notepads>
   </notepads>
   <connection>
-    <name>dw_twitter</name>
+    <name>ods</name>
     <server>localhost</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>dw_twitter</database>
-    <port>5432</port>
-    <username>postgres</username>
-    <password>Encrypted 2be98afc86aa7f2e4bb16bd64d980aac9</password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
-    <attributes>
-      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>5432</attribute></attribute>
-      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>Y</attribute></attribute>
-      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
-    </attributes>
-  </connection>
-  <connection>
-    <name>posgres twitter</name>
-    <server>localhost</server>
-    <type>POSTGRESQL</type>
-    <access>Native</access>
-    <database>twitter_intellgence</database>
+    <database>twitter_intelligence</database>
     <port>5432</port>
     <username>postgres</username>
     <password>Encrypted 2be98afc86aa7f2e4bb16bd64d980aac9</password>
@@ -123,12 +99,17 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Ler dados</from><to>Filtrar dados</to><enabled>Y</enabled> </hop>
-  <hop> <from>Filtrar dados</from><to>Persist&#xea;ncia no DW</to><enabled>Y</enabled> </hop>
+  <hop> <from>Filtrar dados</from><to>Merge hashtag</to><enabled>Y</enabled> </hop>
+  <hop> <from>Ler dados hashtags</from><to>Merge hashtag</to><enabled>Y</enabled> </hop>
+  <hop> <from>Merge hashtag</from><to>Dummy &#x28;do nothing&#x29;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Ler dados twitter</from><to>Filtrar dados</to><enabled>Y</enabled> </hop>
+  <hop> <from>Ler dados media</from><to>Filtrar dados media</to><enabled>Y</enabled> </hop>
+  <hop> <from>Ler dados media</from><to>Merge media</to><enabled>Y</enabled> </hop>
+  <hop> <from>Ler dados twitter</from><to>Merge media</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>Persist&#xea;ncia no DW</name>
-    <type>DimensionLookup</type>
+    <name>Dummy &#x28;do nothing&#x29;</name>
+    <type>Dummy</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -137,61 +118,10 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-      <schema/>
-      <table>dm_twitter</table>
-      <connection>dw_twitter</connection>
-      <commit>1000</commit>
-      <update>Y</update>
-      <fields>
-        <key>
-          <name>id_twiter</name>
-          <lookup>id_twiter</lookup>
-        </key>
-        <date>
-          <name/>
-          <from>date_from</from>
-          <to>date_to</to>
-        </date>
-        <field>
-          <name>text</name>
-          <lookup>text</lookup>
-          <update>Insert</update>
-        </field>
-        <field>
-          <name>retweet_count</name>
-          <lookup>retweet_count</lookup>
-          <update>Insert</update>
-        </field>
-        <field>
-          <name>created_at_twitter</name>
-          <lookup>created_at_twitter</lookup>
-          <update>Insert</update>
-        </field>
-        <field>
-          <name>hashtags</name>
-          <lookup>hashtags</lookup>
-          <update>Insert</update>
-        </field>
-        <return>
-          <name>id_twiter_sk</name>
-          <rename/>
-          <creation_method>tablemax</creation_method>
-          <use_autoinc>N</use_autoinc>
-          <version/>
-        </return>
-      </fields>
-      <sequence/>
-      <min_year>1900</min_year>
-      <max_year>2199</max_year>
-      <cache_size>5000</cache_size>
-      <preload_cache>N</preload_cache>
-      <use_start_date_alternative>N</use_start_date_alternative>
-      <start_date_alternative>none</start_date_alternative>
-      <start_date_field_name/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>416</xloc>
-      <yloc>96</yloc>
+      <xloc>624</xloc>
+      <yloc>288</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -223,21 +153,17 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>hashtags</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>240</xloc>
-      <yloc>96</yloc>
+      <xloc>336</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Ler dados</name>
+    <name>Ler dados hashtags</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -247,8 +173,8 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>posgres twitter</connection>
-    <sql>SELECT &#x2a; from search_twitter</sql>
+    <connection>ods</connection>
+    <sql>SELECT &#x2a; from hashtags</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -256,8 +182,153 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>96</xloc>
-      <yloc>96</yloc>
+      <xloc>112</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Merge hashtag</name>
+    <type>MergeJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<join_type>INNER</join_type>
+<step1>Filtrar dados</step1>
+<step2>Ler dados hashtags</step2>
+    <keys_1>
+      <key>id_twiter</key>
+    </keys_1>
+    <keys_2>
+      <key>id_twiter</key>
+    </keys_2>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>448</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Ler dados media</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>ods</connection>
+    <sql>SELECT &#x2a; FROM media</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>656</xloc>
+      <yloc>16</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Ler dados twitter</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>ods</connection>
+    <sql>SELECT &#x2a; FROM search_twitter&#xd;&#xa;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>112</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Filtrar dados media</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>848</xloc>
+      <yloc>16</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Merge media</name>
+    <type>MergeJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<join_type>INNER</join_type>
+<step1>Ler dados media</step1>
+<step2>Ler dados twitter</step2>
+    <keys_1>
+    </keys_1>
+    <keys_2>
+    </keys_2>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>384</xloc>
+      <yloc>16</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Dummy &#x28;do nothing&#x29; 2</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>848</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
