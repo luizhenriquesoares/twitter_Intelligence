@@ -59,7 +59,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>C&#x3a;&#x5c;pentaho&#x5c;ETL&#x5c;filesystem&#x5c;data_capture.ktr</filename>
+      <filename>C&#x3a;&#x5c;pentaho&#x5c;twitter_Intelligence&#x5c;filesystem&#x5c;data_capture.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -92,7 +92,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>C&#x3a;&#x5c;pentaho&#x5c;ETL&#x5c;filesystem&#x5c;carga_ods.ktr</filename>
+      <filename>C&#x3a;&#x5c;pentaho&#x5c;twitter_Intelligence&#x5c;filesystem&#x5c;carga_ods.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>

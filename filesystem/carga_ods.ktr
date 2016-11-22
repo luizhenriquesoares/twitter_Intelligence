@@ -69,7 +69,7 @@
   <created_date>2016&#x2f;11&#x2f;21 11&#x3a;16&#x3a;04.828</created_date>
   <modified_user>-</modified_user>
   <modified_date>2016&#x2f;11&#x2f;21 11&#x3a;16&#x3a;04.828</modified_date>
-    <key_for_session_key/>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -108,8 +108,190 @@
     </file>
     <fields>
       <field>
+        <name>id_user</name>
+        <path>&#x24;.statuses.&#x2a;.user..id</path>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
         <name>name</name>
         <path>&#x24;.statuses.&#x2a;.user..name</path>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>screen_name</name>
+        <path>&#x24;.statuses.&#x2a;.user.screen_name</path>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>location</name>
+        <path>&#x24;.statuses.&#x2a;.user.location</path>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>description_profile</name>
+        <path>&#x24;.statuses.&#x2a;.user.description</path>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>url_profile</name>
+        <path>&#x24;.statuses.&#x2a;.user.url</path>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>followers_count</name>
+        <path>&#x24;.statuses.&#x2a;.user.followers_count</path>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>friends_count</name>
+        <path>&#x24;.statuses.&#x2a;.user.friends_count</path>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>listed_count</name>
+        <path>&#x24;.statuses.&#x2a;.user.listed_count</path>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>time_zone</name>
+        <path>&#x24;.statuses.&#x2a;.user.time_zone</path>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>text</name>
+        <path>&#x24;.statuses.&#x2a;.text</path>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>id_twiter</name>
+        <path>&#x24;.statuses.&#x2a;.id</path>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>retweet_count</name>
+        <path>&#x24;.statuses.&#x2a;.retweet_count</path>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>created_at_twitter</name>
+        <path>&#x24;.statuses.&#x2a;.created_at</path>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>hashtags</name>
+        <path>&#x24;.statuses.&#x2a;.entities.hashtags</path>
         <type>None</type>
         <format/>
         <currency/>
@@ -185,7 +367,259 @@
 
     <mongo_fields>
       <mongo_field>
+         <incoming_field_name>id_user</incoming_field_name>
+
+         <mongo_doc_path/>
+
+         <use_incoming_field_name_as_mongo_field_name>Y</use_incoming_field_name_as_mongo_field_name>
+
+         <update_match_field>N</update_match_field>
+
+         <modifier_update_operation>N&#x2f;A</modifier_update_operation>
+
+         <modifier_policy/>
+
+         <json_field>N</json_field>
+
+         <allow_null>N</allow_null>
+
+      </mongo_field>
+      <mongo_field>
          <incoming_field_name>name</incoming_field_name>
+
+         <mongo_doc_path/>
+
+         <use_incoming_field_name_as_mongo_field_name>Y</use_incoming_field_name_as_mongo_field_name>
+
+         <update_match_field>N</update_match_field>
+
+         <modifier_update_operation>N&#x2f;A</modifier_update_operation>
+
+         <modifier_policy/>
+
+         <json_field>N</json_field>
+
+         <allow_null>N</allow_null>
+
+      </mongo_field>
+      <mongo_field>
+         <incoming_field_name>screen_name</incoming_field_name>
+
+         <mongo_doc_path/>
+
+         <use_incoming_field_name_as_mongo_field_name>Y</use_incoming_field_name_as_mongo_field_name>
+
+         <update_match_field>N</update_match_field>
+
+         <modifier_update_operation>N&#x2f;A</modifier_update_operation>
+
+         <modifier_policy/>
+
+         <json_field>N</json_field>
+
+         <allow_null>N</allow_null>
+
+      </mongo_field>
+      <mongo_field>
+         <incoming_field_name>location</incoming_field_name>
+
+         <mongo_doc_path/>
+
+         <use_incoming_field_name_as_mongo_field_name>Y</use_incoming_field_name_as_mongo_field_name>
+
+         <update_match_field>N</update_match_field>
+
+         <modifier_update_operation>N&#x2f;A</modifier_update_operation>
+
+         <modifier_policy/>
+
+         <json_field>N</json_field>
+
+         <allow_null>N</allow_null>
+
+      </mongo_field>
+      <mongo_field>
+         <incoming_field_name>description_profile</incoming_field_name>
+
+         <mongo_doc_path/>
+
+         <use_incoming_field_name_as_mongo_field_name>Y</use_incoming_field_name_as_mongo_field_name>
+
+         <update_match_field>N</update_match_field>
+
+         <modifier_update_operation>N&#x2f;A</modifier_update_operation>
+
+         <modifier_policy/>
+
+         <json_field>N</json_field>
+
+         <allow_null>N</allow_null>
+
+      </mongo_field>
+      <mongo_field>
+         <incoming_field_name>followers_count</incoming_field_name>
+
+         <mongo_doc_path/>
+
+         <use_incoming_field_name_as_mongo_field_name>Y</use_incoming_field_name_as_mongo_field_name>
+
+         <update_match_field>N</update_match_field>
+
+         <modifier_update_operation>N&#x2f;A</modifier_update_operation>
+
+         <modifier_policy/>
+
+         <json_field>N</json_field>
+
+         <allow_null>N</allow_null>
+
+      </mongo_field>
+      <mongo_field>
+         <incoming_field_name>friends_count</incoming_field_name>
+
+         <mongo_doc_path/>
+
+         <use_incoming_field_name_as_mongo_field_name>Y</use_incoming_field_name_as_mongo_field_name>
+
+         <update_match_field>N</update_match_field>
+
+         <modifier_update_operation>N&#x2f;A</modifier_update_operation>
+
+         <modifier_policy/>
+
+         <json_field>N</json_field>
+
+         <allow_null>N</allow_null>
+
+      </mongo_field>
+      <mongo_field>
+         <incoming_field_name>listed_count</incoming_field_name>
+
+         <mongo_doc_path/>
+
+         <use_incoming_field_name_as_mongo_field_name>Y</use_incoming_field_name_as_mongo_field_name>
+
+         <update_match_field>N</update_match_field>
+
+         <modifier_update_operation>N&#x2f;A</modifier_update_operation>
+
+         <modifier_policy/>
+
+         <json_field>N</json_field>
+
+         <allow_null>N</allow_null>
+
+      </mongo_field>
+      <mongo_field>
+         <incoming_field_name>time_zone</incoming_field_name>
+
+         <mongo_doc_path/>
+
+         <use_incoming_field_name_as_mongo_field_name>Y</use_incoming_field_name_as_mongo_field_name>
+
+         <update_match_field>N</update_match_field>
+
+         <modifier_update_operation>N&#x2f;A</modifier_update_operation>
+
+         <modifier_policy/>
+
+         <json_field>N</json_field>
+
+         <allow_null>N</allow_null>
+
+      </mongo_field>
+      <mongo_field>
+         <incoming_field_name>text</incoming_field_name>
+
+         <mongo_doc_path/>
+
+         <use_incoming_field_name_as_mongo_field_name>Y</use_incoming_field_name_as_mongo_field_name>
+
+         <update_match_field>N</update_match_field>
+
+         <modifier_update_operation>N&#x2f;A</modifier_update_operation>
+
+         <modifier_policy/>
+
+         <json_field>N</json_field>
+
+         <allow_null>N</allow_null>
+
+      </mongo_field>
+      <mongo_field>
+         <incoming_field_name>id_twiter</incoming_field_name>
+
+         <mongo_doc_path/>
+
+         <use_incoming_field_name_as_mongo_field_name>Y</use_incoming_field_name_as_mongo_field_name>
+
+         <update_match_field>N</update_match_field>
+
+         <modifier_update_operation>N&#x2f;A</modifier_update_operation>
+
+         <modifier_policy/>
+
+         <json_field>N</json_field>
+
+         <allow_null>N</allow_null>
+
+      </mongo_field>
+      <mongo_field>
+         <incoming_field_name>retweet_count</incoming_field_name>
+
+         <mongo_doc_path/>
+
+         <use_incoming_field_name_as_mongo_field_name>Y</use_incoming_field_name_as_mongo_field_name>
+
+         <update_match_field>N</update_match_field>
+
+         <modifier_update_operation>N&#x2f;A</modifier_update_operation>
+
+         <modifier_policy/>
+
+         <json_field>N</json_field>
+
+         <allow_null>N</allow_null>
+
+      </mongo_field>
+      <mongo_field>
+         <incoming_field_name>url_profile</incoming_field_name>
+
+         <mongo_doc_path/>
+
+         <use_incoming_field_name_as_mongo_field_name>Y</use_incoming_field_name_as_mongo_field_name>
+
+         <update_match_field>N</update_match_field>
+
+         <modifier_update_operation>N&#x2f;A</modifier_update_operation>
+
+         <modifier_policy/>
+
+         <json_field>N</json_field>
+
+         <allow_null>N</allow_null>
+
+      </mongo_field>
+      <mongo_field>
+         <incoming_field_name>created_at_twitter</incoming_field_name>
+
+         <mongo_doc_path/>
+
+         <use_incoming_field_name_as_mongo_field_name>Y</use_incoming_field_name_as_mongo_field_name>
+
+         <update_match_field>N</update_match_field>
+
+         <modifier_update_operation>N&#x2f;A</modifier_update_operation>
+
+         <modifier_policy/>
+
+         <json_field>N</json_field>
+
+         <allow_null>N</allow_null>
+
+      </mongo_field>
+      <mongo_field>
+         <incoming_field_name>hashtags</incoming_field_name>
 
          <mongo_doc_path/>
 
@@ -204,8 +638,8 @@
       </mongo_field>
     </mongo_fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>624</xloc>
-      <yloc>192</yloc>
+      <xloc>320</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
