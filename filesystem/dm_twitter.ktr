@@ -442,8 +442,8 @@
            <schema_name/>
            </partitioning>
 <join_type>INNER</join_type>
-<step1>Sort rows</step1>
-<step2>Sort rows 2</step2>
+<step1/>
+<step2/>
     <keys_1>
       <key>id_twiter</key>
     </keys_1>
