@@ -2,7 +2,7 @@
 
 DROP TABLE search_twitter;
 CREATE TABLE search_twitter(
-  id_user bigint,
+ id_user bigint,
  id_twiter bigint,
  "name" varchar(255),
  screen_name varchar(255),
@@ -12,6 +12,7 @@ CREATE TABLE search_twitter(
  time_zone varchar(255),
  created_at_twitter varchar(255),
  text varchar(255),
+ media TEXT,
  retweet_count integer,
  followers_count integer,
  friends_count integer,
