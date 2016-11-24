@@ -121,9 +121,9 @@
     </attributes>
   </connection>
   <order>
+  <hop> <from>Select values</from><to>Dummy &#x28;do nothing&#x29;</to><enabled>Y</enabled> </hop>
   <hop> <from>Ler dados Json</from><to>Filtrar valores</to><enabled>Y</enabled> </hop>
   <hop> <from>Ler dados Json</from><to>Select values</to><enabled>Y</enabled> </hop>
-  <hop> <from>Select values</from><to>Dummy &#x28;do nothing&#x29;</to><enabled>Y</enabled> </hop>
   <hop> <from>Select values</from><to>JSON Input</to><enabled>Y</enabled> </hop>
   <hop> <from>JSON Input</from><to>Selecionar hashtags</to><enabled>Y</enabled> </hop>
   <hop> <from>Selecionar hashtags</from><to>If field value is null</to><enabled>Y</enabled> </hop>
@@ -837,6 +837,12 @@
         <default>&#x5b;&#x5d;</default>
         <type>String</type>
       </value>
+      <value>
+        <name>links</name>
+        <rename>links</rename>
+        <default>&#x5b;&#x5d;</default>
+        <type>String</type>
+      </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -940,6 +946,19 @@
         <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
+      <field>
+        <name>links</name>
+        <path>&#x24;.statuses.&#x2a;.entities.urls</path>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
     </fields>
     <limit>0</limit>
     <IsInFields>N</IsInFields>
@@ -994,6 +1013,19 @@
       <field>
         <name>media_url</name>
         <path>&#x24;..media_url</path>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>link</name>
+        <path>&#x24;..url</path>
         <type>None</type>
         <format/>
         <currency/>
