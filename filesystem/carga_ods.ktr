@@ -101,20 +101,20 @@
   </connection>
   <order>
   <hop> <from>JSON Input 2 2</from><to>If field value is null 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Filtrar valores</from><to>Stream lookup</to><enabled>N</enabled> </hop>
-  <hop> <from>If field value is null</from><to>hashtags table</to><enabled>N</enabled> </hop>
-  <hop> <from>JSON Input</from><to>Selecionar hashtags</to><enabled>N</enabled> </hop>
-  <hop> <from>Ler dados Json</from><to>Filtrar valores</to><enabled>N</enabled> </hop>
-  <hop> <from>Ler dados Json</from><to>Select values</to><enabled>N</enabled> </hop>
-  <hop> <from>Selecionar hashtags</from><to>If field value is null</to><enabled>N</enabled> </hop>
-  <hop> <from>Select values</from><to>Dummy &#x28;do nothing&#x29;</to><enabled>N</enabled> </hop>
-  <hop> <from>Select values</from><to>JSON Input</to><enabled>N</enabled> </hop>
-  <hop> <from>Stream lookup</from><to>tratar media</to><enabled>N</enabled> </hop>
-  <hop> <from>tratar media</from><to> twitter_intelligence</to><enabled>N</enabled> </hop>
-  <hop> <from>tratar media</from><to>Dummy &#x28;do nothing&#x29; 2</to><enabled>N</enabled> </hop>
-  <hop> <from>Stream lookup</from><to>Dummy &#x28;do nothing&#x29; 3</to><enabled>N</enabled> </hop>
+  <hop> <from>Filtrar valores</from><to>Stream lookup</to><enabled>Y</enabled> </hop>
+  <hop> <from>If field value is null</from><to>hashtags table</to><enabled>Y</enabled> </hop>
+  <hop> <from>JSON Input</from><to>Selecionar hashtags</to><enabled>Y</enabled> </hop>
+  <hop> <from>Ler dados Json</from><to>Filtrar valores</to><enabled>Y</enabled> </hop>
+  <hop> <from>Ler dados Json</from><to>Select values</to><enabled>Y</enabled> </hop>
+  <hop> <from>Selecionar hashtags</from><to>If field value is null</to><enabled>Y</enabled> </hop>
+  <hop> <from>Select values</from><to>Dummy &#x28;do nothing&#x29;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Select values</from><to>JSON Input</to><enabled>Y</enabled> </hop>
+  <hop> <from>Stream lookup</from><to>tratar media</to><enabled>Y</enabled> </hop>
+  <hop> <from>tratar media</from><to> twitter_intelligence</to><enabled>Y</enabled> </hop>
+  <hop> <from>tratar media</from><to>Dummy &#x28;do nothing&#x29; 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Stream lookup</from><to>Dummy &#x28;do nothing&#x29; 3</to><enabled>Y</enabled> </hop>
   <hop> <from>media 2</from><to>JSON Input 2 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>If field value is null 2</from><to>Stream lookup</to><enabled>N</enabled> </hop>
+  <hop> <from>If field value is null 2</from><to>Stream lookup</to><enabled>Y</enabled> </hop>
   <hop> <from>If field value is null 2</from><to>Dummy &#x28;do nothing&#x29; 4</to><enabled>Y</enabled> </hop>
   </order>
   <step>
@@ -440,7 +440,7 @@
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>592</xloc>
+      <xloc>640</xloc>
       <yloc>336</yloc>
       <draw>Y</draw>
       </GUI>
@@ -975,12 +975,6 @@
         <default>&#x5b;&#x5d;</default>
         <type>String</type>
       </value>
-      <value>
-        <name>links</name>
-        <rename>links</rename>
-        <default>&#x5b;&#x5d;</default>
-        <type>String</type>
-      </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -1022,7 +1016,7 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>736</xloc>
+      <xloc>784</xloc>
       <yloc>336</yloc>
       <draw>Y</draw>
       </GUI>
