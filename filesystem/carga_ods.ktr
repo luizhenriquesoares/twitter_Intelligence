@@ -74,27 +74,6 @@
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
-    <notepad>
-      <note>This step doesn&#x27;t know how to handle&#xa;sparse data &#x28;missing nodes&#x29;&#x3b;&#xa;So I&#x27;ve added another step retrieving&#xa;only the unique tweet.id&#xa;https&#x3a;&#x2f;&#x2f;dev.twitter.com&#x2f;overview&#x2f;api&#x2f;tweets&#xa;and the media collection </note>
-      <xloc>448</xloc>
-      <yloc>0</yloc>
-      <width>310</width>
-      <heigth>124</heigth>
-      <fontname>.SF NS Text</fontname>
-      <fontsize>13</fontsize>
-      <fontbold>N</fontbold>
-      <fontitalic>N</fontitalic>
-      <fontcolorred>0</fontcolorred>
-      <fontcolorgreen>0</fontcolorgreen>
-      <fontcolorblue>0</fontcolorblue>
-      <backgroundcolorred>255</backgroundcolorred>
-      <backgroundcolorgreen>205</backgroundcolorgreen>
-      <backgroundcolorblue>112</backgroundcolorblue>
-      <bordercolorred>100</bordercolorred>
-      <bordercolorgreen>100</bordercolorgreen>
-      <bordercolorblue>100</bordercolorblue>
-      <drawshadow>Y</drawshadow>
-    </notepad>
   </notepads>
   <connection>
     <name>Twitter Intelligence</name>
@@ -121,18 +100,22 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Select values</from><to>Dummy &#x28;do nothing&#x29;</to><enabled>Y</enabled> </hop>
-  <hop> <from>Ler dados Json</from><to>Filtrar valores</to><enabled>Y</enabled> </hop>
-  <hop> <from>Ler dados Json</from><to>Select values</to><enabled>Y</enabled> </hop>
-  <hop> <from>Select values</from><to>JSON Input</to><enabled>Y</enabled> </hop>
-  <hop> <from>JSON Input</from><to>Selecionar hashtags</to><enabled>Y</enabled> </hop>
-  <hop> <from>Selecionar hashtags</from><to>If field value is null</to><enabled>Y</enabled> </hop>
-  <hop> <from>If field value is null</from><to>hashtags table</to><enabled>Y</enabled> </hop>
-  <hop> <from>Filtrar valores</from><to>Stream lookup</to><enabled>Y</enabled> </hop>
-  <hop> <from>media</from><to>Stream lookup</to><enabled>Y</enabled> </hop>
-  <hop> <from>Stream lookup</from><to>tratar media</to><enabled>Y</enabled> </hop>
-  <hop> <from>tratar media</from><to> twitter_intelligence</to><enabled>Y</enabled> </hop>
-  <hop> <from>tratar media</from><to>Dummy &#x28;do nothing&#x29; 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>JSON Input 2 2</from><to>If field value is null 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Filtrar valores</from><to>Stream lookup</to><enabled>N</enabled> </hop>
+  <hop> <from>If field value is null</from><to>hashtags table</to><enabled>N</enabled> </hop>
+  <hop> <from>JSON Input</from><to>Selecionar hashtags</to><enabled>N</enabled> </hop>
+  <hop> <from>Ler dados Json</from><to>Filtrar valores</to><enabled>N</enabled> </hop>
+  <hop> <from>Ler dados Json</from><to>Select values</to><enabled>N</enabled> </hop>
+  <hop> <from>Selecionar hashtags</from><to>If field value is null</to><enabled>N</enabled> </hop>
+  <hop> <from>Select values</from><to>Dummy &#x28;do nothing&#x29;</to><enabled>N</enabled> </hop>
+  <hop> <from>Select values</from><to>JSON Input</to><enabled>N</enabled> </hop>
+  <hop> <from>Stream lookup</from><to>tratar media</to><enabled>N</enabled> </hop>
+  <hop> <from>tratar media</from><to> twitter_intelligence</to><enabled>N</enabled> </hop>
+  <hop> <from>tratar media</from><to>Dummy &#x28;do nothing&#x29; 2</to><enabled>N</enabled> </hop>
+  <hop> <from>Stream lookup</from><to>Dummy &#x28;do nothing&#x29; 3</to><enabled>N</enabled> </hop>
+  <hop> <from>media 2</from><to>JSON Input 2 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>If field value is null 2</from><to>Stream lookup</to><enabled>N</enabled> </hop>
+  <hop> <from>If field value is null 2</from><to>Dummy &#x28;do nothing&#x29; 4</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name> twitter_intelligence</name>
@@ -167,7 +150,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>848</xloc>
-      <yloc>128</yloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -186,7 +169,64 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>80</xloc>
-      <yloc>432</yloc>
+      <yloc>480</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Dummy &#x28;do nothing&#x29; 2</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>848</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Dummy &#x28;do nothing&#x29; 3</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>688</xloc>
+      <yloc>48</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Dummy &#x28;do nothing&#x29; 4</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>528</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -367,7 +407,7 @@
       </meta>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>400</xloc>
-      <yloc>128</yloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -401,7 +441,41 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>592</xloc>
-      <yloc>288</yloc>
+      <yloc>336</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>If field value is null 2</name>
+    <type>IfNull</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <replaceAllByValue/>
+      <replaceAllMask/>
+      <selectFields>Y</selectFields>
+      <selectValuesType>N</selectValuesType>
+      <setEmptyStringAll>N</setEmptyStringAll>
+    <valuetypes>
+      </valuetypes>
+    <fields>
+      <field>
+        <name>media</name>
+        <value>NULL</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>368</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -465,7 +539,71 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>272</xloc>
-      <yloc>288</yloc>
+      <yloc>336</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>JSON Input 2 2</name>
+    <type>JsonInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <include>N</include>
+    <include_field/>
+    <rownum>N</rownum>
+    <addresultfile>N</addresultfile>
+    <readurl>N</readurl>
+    <removeSourceField>N</removeSourceField>
+    <IsIgnoreEmptyFile>N</IsIgnoreEmptyFile>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <ignoreMissingPath>Y</ignoreMissingPath>
+    <defaultPathLeafToNull>N</defaultPathLeafToNull>
+    <rownum_field/>
+    <file>
+      <name/>
+      <filemask/>
+      <exclude_filemask/>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <fields>
+      <field>
+        <name>media</name>
+        <path>&#x24;..media.media_url</path>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+    </fields>
+    <limit>0</limit>
+    <IsInFields>Y</IsInFields>
+    <IsAFile>N</IsAFile>
+    <valueField>entitites</valueField>
+    <shortFileFieldName/>
+    <pathFieldName/>
+    <hiddenFieldName/>
+    <lastModificationTimeFieldName/>
+    <uriNameFieldName/>
+    <rootUriNameFieldName/>
+    <extensionFieldName/>
+    <sizeFieldName/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>224</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -711,7 +849,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>80</xloc>
-      <yloc>128</yloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -773,7 +911,7 @@
       </meta>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>448</xloc>
-      <yloc>288</yloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -805,7 +943,7 @@
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>80</xloc>
-      <yloc>288</yloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -821,7 +959,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <from>media</from>
+    <from>If field value is null 2</from>
     <input_sorted>N</input_sorted>
     <preserve_memory>Y</preserve_memory>
     <sorted_list>N</sorted_list>
@@ -847,7 +985,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>576</xloc>
-      <yloc>128</yloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -885,16 +1023,16 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>736</xloc>
-      <yloc>288</yloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>media</name>
+    <name>media 2</name>
     <type>JsonInput</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>
@@ -934,21 +1072,8 @@
         <repeat>N</repeat>
       </field>
       <field>
-        <name>media</name>
-        <path>&#x24;.statuses.&#x2a;.entities.media</path>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>links</name>
-        <path>&#x24;.statuses.&#x2a;.entities.urls</path>
+        <name>entitites</name>
+        <path>&#x24;.statuses.&#x2a;.entities</path>
         <type>String</type>
         <format/>
         <currency/>
@@ -975,7 +1100,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>80</xloc>
-      <yloc>16</yloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1052,26 +1177,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>704</xloc>
-      <yloc>128</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Dummy &#x28;do nothing&#x29; 2</name>
-    <type>Dummy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>848</xloc>
-      <yloc>16</yloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
