@@ -156,16 +156,6 @@
           <to>date_to</to>
         </date>
         <field>
-          <name>id_user</name>
-          <lookup>id_user</lookup>
-          <update>Insert</update>
-        </field>
-        <field>
-          <name>retweet</name>
-          <lookup>retweet</lookup>
-          <update>Insert</update>
-        </field>
-        <field>
           <name>created_at</name>
           <lookup>created_at</lookup>
           <update>Insert</update>
@@ -178,11 +168,6 @@
         <field>
           <name>link</name>
           <lookup>link</lookup>
-          <update>Insert</update>
-        </field>
-        <field>
-          <name>favorited</name>
-          <lookup>favorited</lookup>
           <update>Insert</update>
         </field>
         <field>
@@ -203,6 +188,21 @@
         <field>
           <name>hashtags</name>
           <lookup>hashtags</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>id_user</name>
+          <lookup>id_user</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>qtd_retweet</name>
+          <lookup>qtd_retweet</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>like</name>
+          <lookup>like</lookup>
           <update>Insert</update>
         </field>
         <return>
@@ -438,7 +438,7 @@
         <length>-2</length>
         <precision>-2</precision>
       </field>      <field>        <name>retweet</name>
-        <rename/>
+        <rename>qtd_retweet</rename>
         <length>-2</length>
         <precision>-2</precision>
       </field>      <field>        <name>created_at</name>
@@ -454,7 +454,7 @@
         <length>-2</length>
         <precision>-2</precision>
       </field>      <field>        <name>favorited</name>
-        <rename/>
+        <rename>like</rename>
         <length>-2</length>
         <precision>-2</precision>
       </field>      <field>        <name>type_interactions_mentioned</name>
