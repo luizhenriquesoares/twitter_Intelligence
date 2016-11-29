@@ -155,13 +155,18 @@
           <to>date_to</to>
         </date>
         <field>
-          <name>followers</name>
-          <lookup>followers</lookup>
+          <name>qtd_followers</name>
+          <lookup>qtd_followers</lookup>
           <update>Insert</update>
         </field>
         <field>
-          <name>favorited</name>
-          <lookup>favorited</lookup>
+          <name>qtd_like</name>
+          <lookup>qtd_like</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>qtd_followed</name>
+          <lookup>qtd_followed</lookup>
           <update>Insert</update>
         </field>
         <return>
@@ -393,15 +398,19 @@
            <schema_name/>
            </partitioning>
     <fields>      <field>        <name>followers</name>
-        <rename/>
+        <rename>qtd_followers</rename>
         <length>-2</length>
         <precision>-2</precision>
       </field>      <field>        <name>favorited</name>
-        <rename/>
+        <rename>qtd_like</rename>
         <length>-2</length>
         <precision>-2</precision>
       </field>      <field>        <name>id_twitter</name>
         <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>friends</name>
+        <rename>qtd_followed</rename>
         <length>-2</length>
         <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
