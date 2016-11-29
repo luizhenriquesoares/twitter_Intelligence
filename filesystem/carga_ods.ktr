@@ -76,14 +76,14 @@
   <notepads>
   </notepads>
   <connection>
-    <name>Twitter Intelligence</name>
+    <name>twitter_intelligence_ods</name>
     <server>localhost</server>
     <type>POSTGRESQL</type>
-    <access>Native</access>
+    <access>JNDI</access>
     <database>twitter_intelligence</database>
     <port>5432</port>
-    <username>postgres</username>
-    <password>Encrypted 2be98afc86aa7f2e4bb16bd64d980aac9</password>
+    <username/>
+    <password>Encrypted </password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -100,21 +100,13 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>JSON Input 2 2</from><to>If field value is null 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Filtrar valores</from><to>Stream lookup</to><enabled>Y</enabled> </hop>
-  <hop> <from>If field value is null</from><to>hashtags table</to><enabled>Y</enabled> </hop>
-  <hop> <from>JSON Input</from><to>Selecionar hashtags</to><enabled>Y</enabled> </hop>
-  <hop> <from>Ler dados Json</from><to>Filtrar valores</to><enabled>Y</enabled> </hop>
-  <hop> <from>Ler dados Json</from><to>Select values</to><enabled>Y</enabled> </hop>
-  <hop> <from>Selecionar hashtags</from><to>If field value is null</to><enabled>Y</enabled> </hop>
-  <hop> <from>Select values</from><to>JSON Input</to><enabled>Y</enabled> </hop>
-  <hop> <from>media 2</from><to>JSON Input 2 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>If field value is null 2</from><to>Stream lookup</to><enabled>Y</enabled> </hop>
-  <hop> <from>Stream lookup</from><to>Value Mapper</to><enabled>Y</enabled> </hop>
-  <hop> <from>Value Mapper</from><to> twitter_intelligence</to><enabled>Y</enabled> </hop>
+  <hop> <from>tweets</from><to>interprets statuses</to><enabled>Y</enabled> </hop>
+  <hop> <from>interprets statuses</from><to>Dummy &#x28;do nothing&#x29;</to><enabled>Y</enabled> </hop>
+  <hop> <from>interprets statuses</from><to>projeta</to><enabled>Y</enabled> </hop>
+  <hop> <from>projeta</from><to> staging_area</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name> twitter_intelligence</name>
+    <name> staging_area</name>
     <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -124,11 +116,11 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>Twitter Intelligence</connection>
+    <connection>twitter_intelligence_ods</connection>
     <schema/>
-    <table>search_twitter</table>
+    <table>staging</table>
     <commit>1000</commit>
-    <truncate>Y</truncate>
+    <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>
     <use_batch>Y</use_batch>
     <specify_fields>N</specify_fields>
@@ -145,32 +137,198 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>928</xloc>
-      <yloc>176</yloc>
+      <xloc>736</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Filtrar valores</name>
-    <type>SelectValues</type>
+    <name>Dummy &#x28;do nothing&#x29;</name>
+    <type>Dummy</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <fields>      <field>        <name>id_user</name>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>240</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>interprets statuses</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var status &#x3d; JSON.parse&#x28;status&#x29;&#x3b;&#xa;&#xd;&#xa;&#xd;&#xa;var id_twitter  &#x3d; status&#x5b;&#x22;id&#x22;&#x5d;&#x3b;&#xa;var id_user     &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;id&#x22;&#x5d;&#x3b;&#xa;var user_origin_name &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;name&#x22;&#x5d;&#x3b;&#xa;var screen_name &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;screen_name&#x22;&#x5d;&#x3b;&#xd;&#xa;var location    &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;location&#x22;&#x5d;&#x3b;&#xd;&#xa;var description &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;description&#x22;&#x5d;&#x3b;&#xd;&#xa;var url_profile &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;url&#x22;&#x5d;&#x3b;&#xd;&#xa;var followers   &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;followers_count&#x22;&#x5d;&#x3b;&#xd;&#xa;var friends     &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;friends_count&#x22;&#x5d;&#x3b;&#xd;&#xa;var listed      &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;listed_count&#x22;&#x5d;&#x3b;&#xd;&#xa;var time_zone   &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;time_zone&#x22;&#x5d;&#x3b;&#xd;&#xa;var text        &#x3d; status&#x5b;&#x22;text&#x22;&#x5d;&#x3b;&#xd;&#xa;var link   	     &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;url&#x22;&#x5d; &#x3d;&#x3d;&#x3d; &#x27;undefined&#x27; &#x3f; &#x27;NO&#x27; &#x3a; &#x27;YES&#x27;&#xd;&#xa;var hashtags    &#x3d; typeof status&#x5b;&#x22;entities&#x22;&#x5d;&#x5b;&#x22;hashtags&#x22;&#x5d; &#x3d;&#x3d;&#x3d; &#x22;undefined&#x22; &#x3f; &#x27;NO&#x27; &#x3a; &#x27;YES&#x27;&#xd;&#xa;var type_interactions_mentioned &#x3d; typeof status&#x5b;&#x22;entities&#x22;&#x5d;&#x5b;&#x22;user_mentions&#x22;&#x5d; &#x3d;&#x3d;&#x3d; &#x22;undefined&#x22; &#x3f; &#x27;NO&#x27; &#x3a; &#x27;MENTIONED-ONCASE&#x27;&#x3b;&#xd;&#xa;var retweet     &#x3d; status&#x5b;&#x22;retweet_count&#x22;&#x5d;&#x3b;&#xd;&#xa;var created_at  &#x3d; status&#x5b;&#x22;created_at&#x22;&#x5d; &#xa;var location    &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;location&#x22;&#x5d;&#x3b;&#xd;&#xa;var favorited   &#x3d; status&#x5b;&#x22;favorite_count&#x22;&#x5d;&#x3b;&#xa;var media &#x3d; typeof status&#x5b;&#x22;entities&#x22;&#x5d;&#x5b;&#x22;media&#x22;&#x5d; &#x3d;&#x3d;&#x3d; &#x22;undefined&#x22; &#x3f; &#x27;NO&#x27; &#x3a; &#xa;					&#x27;YES&#x27;&#x3b;&#xd;&#xa;&#x2f;&#x2f;var expanded_url &#x3d; status&#x5b;&#x22;extended_entities&#x22;&#x5d;&#x5b;&#x22;media&#x22;&#x5d;&#x5b;&#x22;expanded_url&#x22;&#x5d;&#x3b;&#xd;&#xa;&#xd;&#xa;</jsScript_script>
+      </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
+        <jsScript_name>Item_0</jsScript_name>
+        <jsScript_script>&#x2f;&#x2f;Script here&#xa;&#xa;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>id_user</name>
+        <rename>id_user</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>user_origin_name</name>
+        <rename>user_origin_name</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>screen_name</name>
+        <rename>screen_name</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>location</name>
+        <rename>location</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>description</name>
+        <rename>description</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>url_profile</name>
+        <rename>url_profile</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>followers</name>
+        <rename>followers</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>friends</name>
+        <rename>friends</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>listed</name>
+        <rename>listed</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>time_zone</name>
+        <rename>time_zone</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>text</name>
+        <rename>text</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>hashtags</name>
+        <rename>hashtags</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>retweet</name>
+        <rename>retweet</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>created_at</name>
+        <rename>created_at</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>location</name>
+        <rename>location</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>media</name>
+        <rename>media</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>link</name>
+        <rename>link</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>favorited</name>
+        <rename>favorited</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>type_interactions_mentioned</name>
+        <rename>type_interactions_mentioned</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>id_twitter</name>
+        <rename>id_twitter</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>240</xloc>
+      <yloc>48</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>projeta</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>status</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>id_twiter</name>
+      </field>      <field>        <name>id_user</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>name</name>
+      </field>      <field>        <name>user_origin_name</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -182,7 +340,7 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>description_profile</name>
+      </field>      <field>        <name>description</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -190,15 +348,15 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>followers_count</name>
+      </field>      <field>        <name>followers</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>friends_count</name>
+      </field>      <field>        <name>friends</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>listed_count</name>
+      </field>      <field>        <name>listed</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -210,743 +368,57 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>retweet_count</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>created_at_twitter</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>        <select_unspecified>N</select_unspecified>
-      <meta>        <name>created_at_twitter</name>
-        <rename>created_at_twitter</rename>
-        <type>String</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>dd&#x2f;MM&#x2f;yyyy</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>      <meta>        <name>id_user</name>
-        <rename>id_user</rename>
-        <type>Integer</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>      <meta>        <name>followers_count</name>
-        <rename>followers_count</rename>
-        <type>Integer</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>      <meta>        <name>friends_count</name>
-        <rename>friends_count</rename>
-        <type>Integer</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>      <meta>        <name>listed_count</name>
-        <rename>listed_count</rename>
-        <type>Integer</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>      <meta>        <name>id_twiter</name>
-        <rename>id_twiter</rename>
-        <type>Integer</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>      <meta>        <name>retweet_count</name>
-        <rename>retweet_count</rename>
-        <type>Integer</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>400</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>If field value is null</name>
-    <type>IfNull</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <replaceAllByValue/>
-      <replaceAllMask/>
-      <selectFields>Y</selectFields>
-      <selectValuesType>N</selectValuesType>
-      <setEmptyStringAll>N</setEmptyStringAll>
-    <valuetypes>
-      </valuetypes>
-    <fields>
-      <field>
-        <name>hashtags</name>
-        <value>N</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>640</xloc>
-      <yloc>336</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>If field value is null 2</name>
-    <type>IfNull</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <replaceAllByValue/>
-      <replaceAllMask/>
-      <selectFields>Y</selectFields>
-      <selectValuesType>N</selectValuesType>
-      <setEmptyStringAll>N</setEmptyStringAll>
-    <valuetypes>
-      </valuetypes>
-    <fields>
-      <field>
-        <name>media</name>
-        <value>N</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>368</xloc>
-      <yloc>64</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>JSON Input</name>
-    <type>JsonInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <include>N</include>
-    <include_field/>
-    <rownum>N</rownum>
-    <addresultfile>N</addresultfile>
-    <readurl>N</readurl>
-    <removeSourceField>N</removeSourceField>
-    <IsIgnoreEmptyFile>Y</IsIgnoreEmptyFile>
-    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
-    <ignoreMissingPath>Y</ignoreMissingPath>
-    <defaultPathLeafToNull>N</defaultPathLeafToNull>
-    <rownum_field/>
-    <file>
-      <name/>
-      <filemask/>
-      <exclude_filemask/>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-    </file>
-    <fields>
-      <field>
-        <name>hashtags</name>
-        <path>&#x24;..text</path>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-    </fields>
-    <limit>0</limit>
-    <IsInFields>Y</IsInFields>
-    <IsAFile>N</IsAFile>
-    <valueField>hashtags</valueField>
-    <shortFileFieldName/>
-    <pathFieldName/>
-    <hiddenFieldName/>
-    <lastModificationTimeFieldName/>
-    <uriNameFieldName/>
-    <rootUriNameFieldName/>
-    <extensionFieldName/>
-    <sizeFieldName/>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>272</xloc>
-      <yloc>336</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>JSON Input 2 2</name>
-    <type>JsonInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <include>N</include>
-    <include_field/>
-    <rownum>N</rownum>
-    <addresultfile>N</addresultfile>
-    <readurl>N</readurl>
-    <removeSourceField>N</removeSourceField>
-    <IsIgnoreEmptyFile>N</IsIgnoreEmptyFile>
-    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
-    <ignoreMissingPath>Y</ignoreMissingPath>
-    <defaultPathLeafToNull>N</defaultPathLeafToNull>
-    <rownum_field/>
-    <file>
-      <name/>
-      <filemask/>
-      <exclude_filemask/>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-    </file>
-    <fields>
-      <field>
-        <name>media</name>
-        <path>&#x24;..media.media_url</path>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-    </fields>
-    <limit>0</limit>
-    <IsInFields>Y</IsInFields>
-    <IsAFile>N</IsAFile>
-    <valueField>entitites</valueField>
-    <shortFileFieldName/>
-    <pathFieldName/>
-    <hiddenFieldName/>
-    <lastModificationTimeFieldName/>
-    <uriNameFieldName/>
-    <rootUriNameFieldName/>
-    <extensionFieldName/>
-    <sizeFieldName/>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>224</xloc>
-      <yloc>64</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Ler dados Json</name>
-    <type>JsonInput</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <include>N</include>
-    <include_field/>
-    <rownum>N</rownum>
-    <addresultfile>N</addresultfile>
-    <readurl>N</readurl>
-    <removeSourceField>N</removeSourceField>
-    <IsIgnoreEmptyFile>N</IsIgnoreEmptyFile>
-    <doNotFailIfNoFile>N</doNotFailIfNoFile>
-    <ignoreMissingPath>Y</ignoreMissingPath>
-    <defaultPathLeafToNull>N</defaultPathLeafToNull>
-    <rownum_field/>
-    <file>
-      <name>&#x24;&#x7b;Internal.Entry.Current.Directory&#x7d;&#x2f;..&#x2f;output&#x2f;output.json</name>
-      <filemask/>
-      <exclude_filemask/>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-    </file>
-    <fields>
-      <field>
-        <name>id_user</name>
-        <path>&#x24;.statuses.&#x2a;.user.id</path>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>name</name>
-        <path>&#x24;.statuses.&#x2a;.user.name</path>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>screen_name</name>
-        <path>&#x24;.statuses.&#x2a;.user.screen_name</path>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>location</name>
-        <path>&#x24;.statuses.&#x2a;.user.location</path>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>description_profile</name>
-        <path>&#x24;.statuses.&#x2a;.user.description</path>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>url_profile</name>
-        <path>&#x24;.statuses.&#x2a;.user.url</path>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>followers_count</name>
-        <path>&#x24;.statuses.&#x2a;.user.followers_count</path>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>friends_count</name>
-        <path>&#x24;.statuses.&#x2a;.user.friends_count</path>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>listed_count</name>
-        <path>&#x24;.statuses.&#x2a;.user.listed_count</path>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>time_zone</name>
-        <path>&#x24;.statuses.&#x2a;.user.time_zone</path>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>text</name>
-        <path>&#x24;.statuses.&#x2a;.text</path>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>id_twiter</name>
-        <path>&#x24;.statuses.&#x2a;.id</path>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>retweet_count</name>
-        <path>&#x24;.statuses.&#x2a;.retweet_count</path>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>created_at_twitter</name>
-        <path>&#x24;.statuses.&#x2a;.created_at</path>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>hashtags</name>
-        <path>&#x24;.statuses.&#x2a;.entities.hashtags</path>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-    </fields>
-    <limit>0</limit>
-    <IsInFields>N</IsInFields>
-    <IsAFile>N</IsAFile>
-    <valueField/>
-    <shortFileFieldName/>
-    <pathFieldName/>
-    <hiddenFieldName/>
-    <lastModificationTimeFieldName/>
-    <uriNameFieldName/>
-    <rootUriNameFieldName/>
-    <extensionFieldName/>
-    <sizeFieldName/>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>80</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Selecionar hashtags</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>      <field>        <name>id_twiter</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>id_user</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>hashtags_1</name>
-        <rename>hashtags</rename>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>        <select_unspecified>N</select_unspecified>
-      <meta>        <name>id_user</name>
-        <rename>id_user</rename>
-        <type>Integer</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>      <meta>        <name>id_twiter</name>
-        <rename>id_twiter</rename>
-        <type>Integer</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>448</xloc>
-      <yloc>336</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Select values</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>      <field>        <name>id_user</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>id_twiter</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
       </field>      <field>        <name>hashtags</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
+      </field>      <field>        <name>retweet</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>created_at</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>location_1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>media</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>link</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>favorited</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>type_interactions_mentioned</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>id_twitter</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
-    </fields>     <cluster_schema/>
+      <remove>        <name>status</name>
+      </remove>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>80</xloc>
-      <yloc>336</yloc>
+      <xloc>528</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Stream lookup</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <from>If field value is null 2</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>Y</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>id_twiter</name>
-        <field>id_twiter</field>
-      </key>
-      <value>
-        <name>media</name>
-        <rename>media</rename>
-        <default>&#x5b;&#x5d;</default>
-        <type>String</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>560</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>hashtags table</name>
-    <type>TableOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>Twitter Intelligence</connection>
-    <schema/>
-    <table>hashtags</table>
-    <commit>1000</commit>
-    <truncate>Y</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>N</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>784</xloc>
-      <yloc>336</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>media 2</name>
+    <name>tweets</name>
     <type>JsonInput</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>
@@ -973,21 +445,8 @@
     </file>
     <fields>
       <field>
-        <name>id_twiter</name>
-        <path>&#x24;.statuses.&#x2a;.id</path>
-        <type>Integer</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>entitites</name>
-        <path>&#x24;.statuses.&#x2a;.entities</path>
+        <name>status</name>
+        <path>&#x24;.statuses.&#x2a;</path>
         <type>String</type>
         <format/>
         <currency/>
@@ -1013,36 +472,8 @@
     <sizeFieldName/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>80</xloc>
-      <yloc>64</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Value Mapper</name>
-    <type>ValueMapper</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <field_to_use>media</field_to_use>
-    <target_field/>
-    <non_match_default>Y</non_match_default>
-    <fields>
-      <field>
-        <source_value>N</source_value>
-        <target_value>N</target_value>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>736</xloc>
-      <yloc>176</yloc>
+      <xloc>48</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
