@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>json_read</name>
+    <name>scrapping</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -77,13 +77,19 @@
   </notepads>
   <order>
   <hop> <from>tweets</from><to>interprets statuses</to><enabled>Y</enabled> </hop>
-  <hop> <from>interprets statuses</from><to>projeta</to><enabled>Y</enabled> </hop>
-  <hop> <from>projeta</from><to>Execute a process</to><enabled>Y</enabled> </hop>
-  <hop> <from>Execute a process</from><to>Split field to rows</to><enabled>Y</enabled> </hop>
+  <hop> <from>HTTP Client</from><to>salvar html</to><enabled>Y</enabled> </hop>
+  <hop> <from>interprets statuses</from><to>Dummy &#x28;do nothing&#x29; 3</to><enabled>Y</enabled> </hop>
+  <hop> <from>interprets statuses</from><to>HTTP Client</to><enabled>Y</enabled> </hop>
+  <hop> <from>HTTP Client</from><to>Add constants</to><enabled>N</enabled> </hop>
+  <hop> <from>Add constants</from><to>Extrair rea&#xe7;&#xf5;es</to><enabled>N</enabled> </hop>
+  <hop> <from>Extrair rea&#xe7;&#xf5;es</from><to>projeta</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add constants</from><to>Dummy &#x28;do nothing&#x29;</to><enabled>Y</enabled> </hop>
+  <hop> <from>HTTP Client</from><to>Dummy &#x28;do nothing&#x29;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Dummy &#x28;do nothing&#x29;</from><to>Extrair rea&#xe7;&#xf5;es</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>Execute a process</name>
-    <type>ExecProcess</type>
+    <name>Dummy &#x28;do nothing&#x29; 3</name>
+    <type>Dummy</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -92,41 +98,46 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <processfield>comando</processfield>
-    <resultfieldname>curl_output</resultfieldname>
-    <errorfieldname>Error output</errorfieldname>
-    <exitvaluefieldname>Exit value</exitvaluefieldname>
-    <failwhennotsuccess>N</failwhennotsuccess>
-    <outputlinedelimiter/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>608</xloc>
-      <yloc>48</yloc>
+      <xloc>208</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Split field to rows</name>
-    <type>SplitFieldToRows3</type>
+    <name>HTTP Client</name>
+    <type>HTTP</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>
            <method>none</method>
            <schema_name/>
            </partitioning>
-   <splitfield>usuarios_retorno_teste</splitfield>
-   <delimiter>,</delimiter>
-   <newfield>usuario</newfield>
-   <rownum>N</rownum>
-   <rownum_field/>
-   <resetrownumber>Y</resetrownumber>
-   <delimiter_is_regex>Y</delimiter_is_regex>
+    <url/>
+    <urlInField>Y</urlInField>
+    <urlField>url_tweet</urlField>
+    <encoding/>
+    <httpLogin/>
+    <httpPassword>Encrypted </httpPassword>
+    <proxyHost/>
+    <proxyPort/>
+    <socketTimeout>10000</socketTimeout>
+    <connectionTimeout>10000</connectionTimeout>
+    <closeIdleConnectionsTime>-1</closeIdleConnectionsTime>
+    <lookup>
+    </lookup>
+    <result>
+      <name>result</name>
+      <code/>
+      <response_time/>
+    </result>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>768</xloc>
+      <xloc>416</xloc>
       <yloc>48</yloc>
       <draw>Y</draw>
       </GUI>
@@ -136,7 +147,7 @@
     <name>interprets statuses</name>
     <type>ScriptValueMod</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>
@@ -147,7 +158,7 @@
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var status &#x3d; JSON.parse&#x28;status&#x29;&#x3b;&#xa;&#xa;var id_user     &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;id&#x22;&#x5d;&#x3b;&#xa;var name        &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;name&#x22;&#x5d;&#x3b;&#xa;var screen_name &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;screen_name&#x22;&#x5d;&#x3b;&#xa;var location    &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;location&#x22;&#x5d;&#x3b;&#xa;var media       &#x3d; JSON.stringify&#x28;status&#x5b;&#x22;entities&#x22;&#x5d;&#x5b;&#x22;media&#x22;&#x5d;&#x29;&#x3b;&#xa;var media_count &#x3d; typeof status&#x5b;&#x22;entities&#x22;&#x5d;&#x5b;&#x22;media&#x22;&#x5d; &#x3d;&#x3d;&#x3d; &#x22;undefined&#x22; &#x3f; 0 &#x3a; &#xa;					status&#x5b;&#x22;entities&#x22;&#x5d;&#x5b;&#x22;media&#x22;&#x5d;.length&#x3b;&#xa;var tweet_id    &#x3d; status&#x5b;&#x22;id_str&#x22;&#x5d;&#x3b;&#xa;&#xa;var url_tweet   &#x3d; &#x22;https&#x3a;&#x2f;&#x2f;twitter.com&#x2f;oncase&#x2f;status&#x2f;&#x22;&#x2b;tweet_id&#x3b;&#xa;var comando     &#x3d;  &#x22;curl &#x22;&#x2b;url_tweet&#x3b;&#xa;&#xa;var usuarios_retorno_teste &#x3d; &#x22;marpontes, iandecoutinho, fulano, detal&#x22;&#x3b;&#xa;&#x2f;&#x2a;&#xa;&#xa;&#xa;id_user	&#x24;.statuses.&#x2a;.user.id	None							none	N&#xa;name	&#x24;.statuses.&#x2a;.user.name	None							none	N&#xa;screen_name	&#x24;.statuses.&#x2a;.user.screen_name	None							none	N&#xa;location	&#x24;.statuses.&#x2a;.user.location	None							none	N&#xa;description_profile	&#x24;.statuses.&#x2a;.user.description	None							none	N&#xa;url_profile	&#x24;.statuses.&#x2a;.user.url	None							none	N&#xa;followers_count	&#x24;.statuses.&#x2a;.user.followers_count	None							none	N&#xa;friends_count	&#x24;.statuses.&#x2a;.user.friends_count	None							none	N&#xa;listed_count	&#x24;.statuses.&#x2a;.user.listed_count	None							none	N&#xa;time_zone	&#x24;.statuses.&#x2a;.user.time_zone	None							none	N&#xa;text	&#x24;.statuses.&#x2a;.text	None							none	N&#xa;id_twiter	&#x24;.statuses.&#x2a;.id	None							none	N&#xa;retweet_count	&#x24;.statuses.&#x2a;.retweet_count	None							none	N&#xa;created_at_twitter	&#x24;.statuses.&#x2a;.created_at	None							none	N&#xa;hashtags	&#x24;.statuses.&#x2a;.entities.hashtags	None							none	N&#xa;&#x2a;&#x2f;</jsScript_script>
+        <jsScript_script>var status &#x3d; JSON.parse&#x28;status&#x29;&#x3b;&#xa;&#xd;&#xa;&#xd;&#xa;var id_twitter  &#x3d; status&#x5b;&#x22;id&#x22;&#x5d;&#x3b;&#xa;var id_user     &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;id&#x22;&#x5d;&#x3b;&#xa;var user_origin_name &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;name&#x22;&#x5d;&#x3b;&#xa;var screen_name &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;screen_name&#x22;&#x5d;&#x3b;&#xd;&#xa;var location    &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;location&#x22;&#x5d;&#x3b;&#xd;&#xa;var description &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;description&#x22;&#x5d;&#x3b;&#xd;&#xa;var url_profile &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;url&#x22;&#x5d;&#x3b;&#xd;&#xa;var followers   &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;followers_count&#x22;&#x5d;&#x3b;&#xd;&#xa;var friends     &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;friends_count&#x22;&#x5d;&#x3b;&#xd;&#xa;var listed      &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;listed_count&#x22;&#x5d;&#x3b;&#xd;&#xa;var time_zone   &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;time_zone&#x22;&#x5d;&#x3b;&#xd;&#xa;var text        &#x3d; status&#x5b;&#x22;text&#x22;&#x5d;&#x3b;&#xd;&#xa;var link   	     &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;url&#x22;&#x5d; &#x3d;&#x3d;&#x3d; &#x27;undefined&#x27; &#x3f; &#x27;NO&#x27; &#x3a; &#x27;YES&#x27;&#xd;&#xa;var hashtags    &#x3d; typeof status&#x5b;&#x22;entities&#x22;&#x5d;&#x5b;&#x22;hashtags&#x22;&#x5d; &#x3d;&#x3d;&#x3d; &#x22;undefined&#x22; &#x3f; &#x27;NO&#x27; &#x3a; &#x27;YES&#x27;&#xd;&#xa;var type_interactions_mentioned &#x3d; typeof status&#x5b;&#x22;entities&#x22;&#x5d;&#x5b;&#x22;user_mentions&#x22;&#x5d; &#x3d;&#x3d;&#x3d; &#x22;undefined&#x22; &#x3f; &#x27;NO&#x27; &#x3a; &#x27;MENTIONED-ONCASE&#x27;&#x3b;&#xd;&#xa;var retweet     &#x3d; status&#x5b;&#x22;retweet_count&#x22;&#x5d;&#x3b;&#xd;&#xa;var created_at  &#x3d; status&#x5b;&#x22;created_at&#x22;&#x5d; &#xa;var location    &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;location&#x22;&#x5d;&#x3b;&#xd;&#xa;var favorited   &#x3d; status&#x5b;&#x22;favorite_count&#x22;&#x5d;&#x3b;&#xa;var media &#x3d; typeof status&#x5b;&#x22;entities&#x22;&#x5d;&#x5b;&#x22;media&#x22;&#x5d; &#x3d;&#x3d;&#x3d; &#x22;undefined&#x22; &#x3f; &#x27;NO&#x27; &#x3a; &#x27;YES&#x27;&#x3b;&#xd;&#xa;&#xd;&#xa;&#x2f;&#x2f;var id_media  &#x3d; typeof status&#x5b;&#x22;entities&#x22;&#x5d;&#x5b;&#x22;media&#x22;&#x5d;  &#x3d;&#x3d;&#x3d; &#x22;undefined&#x22; &#x3f; &#x27;undefined&#x27; &#x3a;  status&#x5b;&#x22;entities&#x22;&#x5d;&#x5b;&#x22;media&#x22;&#x5d;&#x5b;i&#x5d;.source_status_id_str&#x3b;&#xd;&#xa;var url_tweet &#x3d; &#x22;https&#x3a;&#x2f;&#x2f;twitter.com&#x2f;&#x22;&#x2b;screen_name&#x2b;&#x22;&#x2f;status&#x2f;&#x22;&#x2b;id_twitter&#x3b;&#xd;&#xa;&#xd;&#xa;</jsScript_script>
       </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
         <jsScript_name>Item_0</jsScript_name>
         <jsScript_script>&#x2f;&#x2f;Script here&#xa;&#xa;</jsScript_script>
@@ -157,8 +168,8 @@
         <length>-1</length>
         <precision>-1</precision>
         <replace>N</replace>
-      </field>      <field>        <name>name</name>
-        <rename>name</rename>
+      </field>      <field>        <name>user_origin_name</name>
+        <rename>user_origin_name</rename>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -175,21 +186,99 @@
         <length>-1</length>
         <precision>-1</precision>
         <replace>N</replace>
+      </field>      <field>        <name>description</name>
+        <rename>description</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>url_profile</name>
+        <rename>url_profile</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>followers</name>
+        <rename>followers</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>friends</name>
+        <rename>friends</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>listed</name>
+        <rename>listed</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>time_zone</name>
+        <rename>time_zone</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>text</name>
+        <rename>text</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>hashtags</name>
+        <rename>hashtags</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>retweet</name>
+        <rename>retweet</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>created_at</name>
+        <rename>created_at</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>location</name>
+        <rename>location</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
       </field>      <field>        <name>media</name>
         <rename>media</rename>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
         <replace>N</replace>
-      </field>      <field>        <name>media_count</name>
-        <rename>media_count</rename>
+      </field>      <field>        <name>link</name>
+        <rename>link</rename>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
         <replace>N</replace>
-      </field>      <field>        <name>tweet_id</name>
-        <rename>tweet_id</rename>
+      </field>      <field>        <name>favorited</name>
+        <rename>favorited</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>type_interactions_mentioned</name>
+        <rename>type_interactions_mentioned</rename>
         <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>id_twitter</name>
+        <rename>id_twitter</rename>
+        <type>Integer</type>
         <length>-1</length>
         <precision>-1</precision>
         <replace>N</replace>
@@ -199,29 +288,17 @@
         <length>-1</length>
         <precision>-1</precision>
         <replace>N</replace>
-      </field>      <field>        <name>comando</name>
-        <rename>comando</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>usuarios_retorno_teste</name>
-        <rename>usuarios_retorno_teste</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>256</xloc>
+      <xloc>208</xloc>
       <yloc>48</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>projeta</name>
-    <type>SelectValues</type>
+    <name>salvar html</name>
+    <type>TextFileOutput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -230,12 +307,43 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <fields>        <select_unspecified>N</select_unspecified>
-      <remove>        <name>status</name>
-      </remove>    </fields>     <cluster_schema/>
+    <separator/>
+    <enclosure/>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>Y</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding>windows-1252</encoding>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>C&#x3a;&#x5c;pentaho&#x5c;ETL&#x5c;twitter_Intelligence&#x5c;output&#x5c;out</name>
+      <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>html</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+    </fields>
+     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>448</xloc>
-      <yloc>48</yloc>
+      <xloc>416</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -300,6 +408,151 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>48</xloc>
       <yloc>48</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Add constants</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>result</name>
+        <type>string</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>592</xloc>
+      <yloc>48</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Extrair rea&#xe7;&#xf5;es</name>
+    <type>UserDefinedJavaClass</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+
+    <definitions>
+        <definition>
+        <class_type>TRANSFORM_CLASS</class_type>
+
+        <class_name>Processor</class_name>
+
+        <class_source><![CDATA[
+public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws KettleException{
+	if (first){
+	  first = false;
+	}
+
+	Object[] r = getRow();
+
+	if (r == null) {
+	  setOutputDone();
+	  return false;
+	}
+
+    r = createOutputRow(r, data.outputRowMeta.size());
+
+    String html = get(Fields.In, "result").getString(r);
+    String result = get(Fields.In, "result").getString(r);
+
+	jodd.jerry.Jerry doc = jodd.jerry.Jerry.jerry(html);
+    String lista = doc.$("div.js-tweet-details-fixer").html();
+    
+    get(Fields.Out, "lista").setValue(r, "<lista>"+lista+"</lista>");
+
+
+    putRow(data.outputRowMeta, r);
+
+	return true;
+}
+]]></class_source>
+        </definition>
+    </definitions>
+    <fields>
+        <field>
+        <field_name> lista</field_name>
+
+        <field_type>String</field_type>
+
+        <field_length>-1</field_length>
+
+        <field_precision>-1</field_precision>
+
+        </field>
+    </fields><clear_result_fields>N</clear_result_fields>
+<info_steps></info_steps><target_steps></target_steps><usage_parameters></usage_parameters>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>752</xloc>
+      <yloc>48</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>projeta</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name> lista</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>752</xloc>
+      <yloc>208</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Dummy &#x28;do nothing&#x29;</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>592</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
