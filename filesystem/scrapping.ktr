@@ -175,7 +175,7 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
     String html = get(Fields.In, "html").getString(r);
 
 	jodd.jerry.Jerry doc = jodd.jerry.Jerry.jerry(html);
-    String lista = 'doc.$("div.js-tweet-details-fixer").html();';
+    String lista = doc.$("div.js-tweet-details-fixer").html();
     
     get(Fields.Out, "lista").setValue(r, "<lista>"+lista+"</lista>");
 
