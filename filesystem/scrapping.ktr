@@ -78,7 +78,6 @@
   <order>
   <hop> <from>tweets</from><to>interprets statuses</to><enabled>Y</enabled> </hop>
   <hop> <from>HTTP Client</from><to>salvar html</to><enabled>Y</enabled> </hop>
-  <hop> <from>interprets statuses</from><to>Dummy &#x28;do nothing&#x29; 3</to><enabled>Y</enabled> </hop>
   <hop> <from>interprets statuses</from><to>HTTP Client</to><enabled>Y</enabled> </hop>
   <hop> <from>HTTP Client</from><to>Add constants</to><enabled>N</enabled> </hop>
   <hop> <from>Add constants</from><to>Extrair rea&#xe7;&#xf5;es</to><enabled>N</enabled> </hop>
@@ -86,9 +85,43 @@
   <hop> <from>Add constants</from><to>Dummy &#x28;do nothing&#x29;</to><enabled>Y</enabled> </hop>
   <hop> <from>HTTP Client</from><to>Dummy &#x28;do nothing&#x29;</to><enabled>Y</enabled> </hop>
   <hop> <from>Dummy &#x28;do nothing&#x29;</from><to>Extrair rea&#xe7;&#xf5;es</to><enabled>Y</enabled> </hop>
+  <hop> <from>projeta</from><to>Dummy &#x28;do nothing&#x29; 2</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>Dummy &#x28;do nothing&#x29; 3</name>
+    <name>Add constants</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>result</name>
+        <type>string</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>592</xloc>
+      <yloc>48</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Dummy &#x28;do nothing&#x29;</name>
     <type>Dummy</type>
     <description/>
     <distribute>Y</distribute>
@@ -100,8 +133,76 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>208</xloc>
+      <xloc>592</xloc>
       <yloc>224</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Extrair rea&#xe7;&#xf5;es</name>
+    <type>UserDefinedJavaClass</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+
+    <definitions>
+        <definition>
+        <class_type>TRANSFORM_CLASS</class_type>
+
+        <class_name>Processor</class_name>
+
+        <class_source><![CDATA[
+public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws KettleException{
+	if (first){
+	  first = false;
+	}
+
+	Object[] r = getRow();
+
+	if (r == null) {
+	  setOutputDone();
+	  return false;
+	}
+
+    r = createOutputRow(r, data.outputRowMeta.size());
+
+    String html = get(Fields.In, "html").getString(r);
+
+	jodd.jerry.Jerry doc = jodd.jerry.Jerry.jerry(html);
+    String lista = 'doc.$("div.js-tweet-details-fixer").html();';
+    
+    get(Fields.Out, "lista").setValue(r, "<lista>"+lista+"</lista>");
+
+
+    putRow(data.outputRowMeta, r);
+
+	return true;
+}
+]]></class_source>
+        </definition>
+    </definitions>
+    <fields>
+        <field>
+        <field_name> lista</field_name>
+
+        <field_type>String</field_type>
+
+        <field_length>-1</field_length>
+
+        <field_precision>-1</field_precision>
+
+        </field>
+    </fields><clear_result_fields>N</clear_result_fields>
+<info_steps></info_steps><target_steps></target_steps><usage_parameters></usage_parameters>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>752</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -131,7 +232,7 @@
     <lookup>
     </lookup>
     <result>
-      <name>result</name>
+      <name>html</name>
       <code/>
       <response_time/>
     </result>
@@ -158,7 +259,7 @@
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var status &#x3d; JSON.parse&#x28;status&#x29;&#x3b;&#xa;&#xd;&#xa;&#xd;&#xa;var id_twitter  &#x3d; status&#x5b;&#x22;id&#x22;&#x5d;&#x3b;&#xa;var id_user     &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;id&#x22;&#x5d;&#x3b;&#xa;var user_origin_name &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;name&#x22;&#x5d;&#x3b;&#xa;var screen_name &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;screen_name&#x22;&#x5d;&#x3b;&#xd;&#xa;var location    &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;location&#x22;&#x5d;&#x3b;&#xd;&#xa;var description &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;description&#x22;&#x5d;&#x3b;&#xd;&#xa;var url_profile &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;url&#x22;&#x5d;&#x3b;&#xd;&#xa;var followers   &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;followers_count&#x22;&#x5d;&#x3b;&#xd;&#xa;var friends     &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;friends_count&#x22;&#x5d;&#x3b;&#xd;&#xa;var listed      &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;listed_count&#x22;&#x5d;&#x3b;&#xd;&#xa;var time_zone   &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;time_zone&#x22;&#x5d;&#x3b;&#xd;&#xa;var text        &#x3d; status&#x5b;&#x22;text&#x22;&#x5d;&#x3b;&#xd;&#xa;var link   	     &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;url&#x22;&#x5d; &#x3d;&#x3d;&#x3d; &#x27;undefined&#x27; &#x3f; &#x27;NO&#x27; &#x3a; &#x27;YES&#x27;&#xd;&#xa;var hashtags    &#x3d; typeof status&#x5b;&#x22;entities&#x22;&#x5d;&#x5b;&#x22;hashtags&#x22;&#x5d; &#x3d;&#x3d;&#x3d; &#x22;undefined&#x22; &#x3f; &#x27;NO&#x27; &#x3a; &#x27;YES&#x27;&#xd;&#xa;var type_interactions_mentioned &#x3d; typeof status&#x5b;&#x22;entities&#x22;&#x5d;&#x5b;&#x22;user_mentions&#x22;&#x5d; &#x3d;&#x3d;&#x3d; &#x22;undefined&#x22; &#x3f; &#x27;NO&#x27; &#x3a; &#x27;MENTIONED-ONCASE&#x27;&#x3b;&#xd;&#xa;var retweet     &#x3d; status&#x5b;&#x22;retweet_count&#x22;&#x5d;&#x3b;&#xd;&#xa;var created_at  &#x3d; status&#x5b;&#x22;created_at&#x22;&#x5d; &#xa;var location    &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;location&#x22;&#x5d;&#x3b;&#xd;&#xa;var favorited   &#x3d; status&#x5b;&#x22;favorite_count&#x22;&#x5d;&#x3b;&#xa;var media &#x3d; typeof status&#x5b;&#x22;entities&#x22;&#x5d;&#x5b;&#x22;media&#x22;&#x5d; &#x3d;&#x3d;&#x3d; &#x22;undefined&#x22; &#x3f; &#x27;NO&#x27; &#x3a; &#x27;YES&#x27;&#x3b;&#xd;&#xa;&#xd;&#xa;&#x2f;&#x2f;var id_media  &#x3d; typeof status&#x5b;&#x22;entities&#x22;&#x5d;&#x5b;&#x22;media&#x22;&#x5d;  &#x3d;&#x3d;&#x3d; &#x22;undefined&#x22; &#x3f; &#x27;undefined&#x27; &#x3a;  status&#x5b;&#x22;entities&#x22;&#x5d;&#x5b;&#x22;media&#x22;&#x5d;&#x5b;i&#x5d;.source_status_id_str&#x3b;&#xd;&#xa;var url_tweet &#x3d; &#x22;https&#x3a;&#x2f;&#x2f;twitter.com&#x2f;&#x22;&#x2b;screen_name&#x2b;&#x22;&#x2f;status&#x2f;&#x22;&#x2b;id_twitter&#x3b;&#xd;&#xa;&#xd;&#xa;</jsScript_script>
+        <jsScript_script>var status &#x3d; JSON.parse&#x28;status&#x29;&#x3b;&#xa;&#xd;&#xa;&#xd;&#xa;var id_twitter  &#x3d; status&#x5b;&#x22;id&#x22;&#x5d;&#x3b;&#xa;var id_user     &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;id&#x22;&#x5d;&#x3b;&#xa;var user_origin_name &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;name&#x22;&#x5d;&#x3b;&#xa;var screen_name &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;screen_name&#x22;&#x5d;&#x3b;&#xd;&#xa;var location    &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;location&#x22;&#x5d;&#x3b;&#xd;&#xa;var description &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;description&#x22;&#x5d;&#x3b;&#xd;&#xa;var url_profile &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;url&#x22;&#x5d;&#x3b;&#xd;&#xa;var followers   &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;followers_count&#x22;&#x5d;&#x3b;&#xd;&#xa;var friends     &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;friends_count&#x22;&#x5d;&#x3b;&#xd;&#xa;var listed      &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;listed_count&#x22;&#x5d;&#x3b;&#xd;&#xa;var time_zone   &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;time_zone&#x22;&#x5d;&#x3b;&#xd;&#xa;var text        &#x3d; status&#x5b;&#x22;text&#x22;&#x5d;&#x3b;&#xd;&#xa;var link   	     &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;url&#x22;&#x5d; &#x3d;&#x3d;&#x3d; &#x27;undefined&#x27; &#x3f; &#x27;NO&#x27; &#x3a; &#x27;YES&#x27;&#xd;&#xa;var hashtags    &#x3d; typeof status&#x5b;&#x22;entities&#x22;&#x5d;&#x5b;&#x22;hashtags&#x22;&#x5d; &#x3d;&#x3d;&#x3d; &#x22;undefined&#x22; &#x3f; &#x27;NO&#x27; &#x3a; &#x27;YES&#x27;&#xd;&#xa;var type_interactions_mentioned &#x3d; typeof status&#x5b;&#x22;entities&#x22;&#x5d;&#x5b;&#x22;user_mentions&#x22;&#x5d; &#x3d;&#x3d;&#x3d; &#x22;undefined&#x22; &#x3f; &#x27;NO&#x27; &#x3a; &#x27;MENTIONED-ONCASE&#x27;&#x3b;&#xd;&#xa;var retweet     &#x3d; status&#x5b;&#x22;retweet_count&#x22;&#x5d;&#x3b;&#xd;&#xa;var created_at  &#x3d; status&#x5b;&#x22;created_at&#x22;&#x5d; &#xa;var location    &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;location&#x22;&#x5d;&#x3b;&#xd;&#xa;var favorited   &#x3d; status&#x5b;&#x22;favorite_count&#x22;&#x5d;&#x3b;&#xa;var media &#x3d; typeof status&#x5b;&#x22;entities&#x22;&#x5d;&#x5b;&#x22;media&#x22;&#x5d; &#x3d;&#x3d;&#x3d; &#x22;undefined&#x22; &#x3f; &#x27;NO&#x27; &#x3a; &#x27;YES&#x27;&#x3b;&#xd;&#xa;var url_tweet &#x3d; &#x22;https&#x3a;&#x2f;&#x2f;twitter.com&#x2f;&#x22;&#x2b;screen_name&#x2b;&#x22;&#x2f;status&#x2f;&#x22;&#x2b;id_twitter&#x3b;&#xd;&#xa;&#xd;&#xa;</jsScript_script>
       </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
         <jsScript_name>Item_0</jsScript_name>
         <jsScript_script>&#x2f;&#x2f;Script here&#xa;&#xa;</jsScript_script>
@@ -297,6 +398,30 @@
     </step>
 
   <step>
+    <name>projeta</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name> lista</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>752</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>salvar html</name>
     <type>TextFileOutput</type>
     <description/>
@@ -413,133 +538,7 @@
     </step>
 
   <step>
-    <name>Add constants</name>
-    <type>Constant</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>result</name>
-        <type>string</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>592</xloc>
-      <yloc>48</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Extrair rea&#xe7;&#xf5;es</name>
-    <type>UserDefinedJavaClass</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-
-    <definitions>
-        <definition>
-        <class_type>TRANSFORM_CLASS</class_type>
-
-        <class_name>Processor</class_name>
-
-        <class_source><![CDATA[
-public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws KettleException{
-	if (first){
-	  first = false;
-	}
-
-	Object[] r = getRow();
-
-	if (r == null) {
-	  setOutputDone();
-	  return false;
-	}
-
-    r = createOutputRow(r, data.outputRowMeta.size());
-
-    String html = get(Fields.In, "result").getString(r);
-    String result = get(Fields.In, "result").getString(r);
-
-	jodd.jerry.Jerry doc = jodd.jerry.Jerry.jerry(html);
-    String lista = doc.$("div.js-tweet-details-fixer").html();
-    
-    get(Fields.Out, "lista").setValue(r, "<lista>"+lista+"</lista>");
-
-
-    putRow(data.outputRowMeta, r);
-
-	return true;
-}
-]]></class_source>
-        </definition>
-    </definitions>
-    <fields>
-        <field>
-        <field_name> lista</field_name>
-
-        <field_type>String</field_type>
-
-        <field_length>-1</field_length>
-
-        <field_precision>-1</field_precision>
-
-        </field>
-    </fields><clear_result_fields>N</clear_result_fields>
-<info_steps></info_steps><target_steps></target_steps><usage_parameters></usage_parameters>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>752</xloc>
-      <yloc>48</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>projeta</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>      <field>        <name> lista</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>        <select_unspecified>N</select_unspecified>
-    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>752</xloc>
-      <yloc>208</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Dummy &#x28;do nothing&#x29;</name>
+    <name>Dummy &#x28;do nothing&#x29; 2</name>
     <type>Dummy</type>
     <description/>
     <distribute>Y</distribute>
@@ -551,8 +550,8 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>592</xloc>
-      <yloc>224</yloc>
+      <xloc>880</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
