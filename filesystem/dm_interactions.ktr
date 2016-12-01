@@ -187,8 +187,8 @@
       <start_date_field_name/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>656</xloc>
-      <yloc>288</yloc>
+      <xloc>416</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -340,7 +340,7 @@
         <set_empty_string>N</set_empty_string>
         </field>
       <field>
-        <name>type_interactions_mentioned</name>
+        <name>interaction_type</name>
         <value>N</value>
         <mask/>
         <set_empty_string>N</set_empty_string>
@@ -416,7 +416,7 @@
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>400</xloc>
+      <xloc>416</xloc>
       <yloc>80</yloc>
       <draw>Y</draw>
       </GUI>
