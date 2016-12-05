@@ -169,6 +169,11 @@
           <lookup>qtd_followed</lookup>
           <update>Insert</update>
         </field>
+        <field>
+          <name>user_liked</name>
+          <lookup>user_liked</lookup>
+          <update>Insert</update>
+        </field>
         <return>
           <name>id_twitter_sk</name>
           <rename/>
@@ -233,128 +238,134 @@
     <fields>
       <field>
         <name>id_user</name>
-        <value>N</value>
+        <value>NULL</value>
         <mask/>
         <set_empty_string>N</set_empty_string>
         </field>
       <field>
         <name>user_origin_name</name>
-        <value>N</value>
+        <value>NULL</value>
         <mask/>
         <set_empty_string>N</set_empty_string>
         </field>
       <field>
         <name>screen_name</name>
-        <value>N</value>
+        <value>NULL</value>
         <mask/>
         <set_empty_string>N</set_empty_string>
         </field>
       <field>
         <name>location</name>
-        <value>N</value>
+        <value>NULL</value>
         <mask/>
         <set_empty_string>N</set_empty_string>
         </field>
       <field>
         <name>description</name>
-        <value>N</value>
+        <value>NULL</value>
         <mask/>
         <set_empty_string>N</set_empty_string>
         </field>
       <field>
         <name>url_profile</name>
-        <value>N</value>
+        <value>NULL</value>
         <mask/>
         <set_empty_string>N</set_empty_string>
         </field>
       <field>
         <name>followers</name>
-        <value>N</value>
+        <value>NULL</value>
         <mask/>
         <set_empty_string>N</set_empty_string>
         </field>
       <field>
         <name>friends</name>
-        <value>N</value>
+        <value>NULL</value>
         <mask/>
         <set_empty_string>N</set_empty_string>
         </field>
       <field>
         <name>listed</name>
-        <value>N</value>
+        <value>NULL</value>
         <mask/>
         <set_empty_string>N</set_empty_string>
         </field>
       <field>
         <name>time_zone</name>
-        <value>N</value>
+        <value>NULL</value>
         <mask/>
         <set_empty_string>N</set_empty_string>
         </field>
       <field>
         <name>text</name>
-        <value>N</value>
+        <value>NULL</value>
         <mask/>
         <set_empty_string>N</set_empty_string>
         </field>
       <field>
         <name>hashtags</name>
-        <value>N</value>
+        <value>NULL</value>
         <mask/>
         <set_empty_string>N</set_empty_string>
         </field>
       <field>
         <name>retweet</name>
-        <value>N</value>
+        <value>NULL</value>
         <mask/>
         <set_empty_string>N</set_empty_string>
         </field>
       <field>
         <name>created_at</name>
-        <value>N</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      <field>
-        <name>location_1</name>
-        <value>N</value>
+        <value>NULL</value>
         <mask/>
         <set_empty_string>N</set_empty_string>
         </field>
       <field>
         <name>media</name>
-        <value>N</value>
+        <value>NULL</value>
         <mask/>
         <set_empty_string>N</set_empty_string>
         </field>
       <field>
         <name>link</name>
-        <value>N</value>
+        <value>NULL</value>
         <mask/>
         <set_empty_string>N</set_empty_string>
         </field>
       <field>
         <name>favorited</name>
-        <value>N</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      <field>
-        <name>interaction_type</name>
-        <value>N</value>
+        <value>NULL</value>
         <mask/>
         <set_empty_string>N</set_empty_string>
         </field>
       <field>
         <name>id_twitter</name>
-        <value>0</value>
+        <value>NULL</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>interaction_type</name>
+        <value>NULL</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>retweet_count</name>
+        <value>NULL</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>user_liked</name>
+        <value>NULL</value>
         <mask/>
         <set_empty_string>N</set_empty_string>
         </field>
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>240</xloc>
+      <xloc>256</xloc>
       <yloc>80</yloc>
       <draw>Y</draw>
       </GUI>
@@ -411,6 +422,10 @@
         <precision>-2</precision>
       </field>      <field>        <name>friends</name>
         <rename>qtd_followed</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>user_liked</name>
+        <rename/>
         <length>-2</length>
         <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
