@@ -200,6 +200,11 @@
           <lookup>interaction_type</lookup>
           <update>Insert</update>
         </field>
+        <field>
+          <name>like</name>
+          <lookup>like</lookup>
+          <update>Insert</update>
+        </field>
         <return>
           <name>id_twitter_sk</name>
           <rename/>
