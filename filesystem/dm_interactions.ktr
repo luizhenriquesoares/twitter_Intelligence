@@ -125,7 +125,7 @@
   <order>
   <hop> <from>Ler dados Staging </from><to>If field value is null</to><enabled>Y</enabled> </hop>
   <hop> <from>Select values</from><to>Dummy &#x28;do nothing&#x29;</to><enabled>Y</enabled> </hop>
-  <hop> <from>Select values</from><to>Dimension lookup&#x2f;update</to><enabled>N</enabled> </hop>
+  <hop> <from>Select values</from><to>Dimension lookup&#x2f;update</to><enabled>Y</enabled> </hop>
   <hop> <from>If field value is null</from><to>Select values</to><enabled>Y</enabled> </hop>
   </order>
   <step>
