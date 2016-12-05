@@ -1,12 +1,14 @@
 <Schema name="dw_twitter">
-  <Dimension type="StandardDimension" visible="true" foreignKey="id_twitter_sk" name="dm_twitter">
-    <Hierarchy name="New Hierarchy 0" visible="true" hasAll="true" primaryKeyTable="dm_twiiter">
-    </Hierarchy>
-  </Dimension>
   <Cube name="dm_twitter" visible="true" cache="true" enabled="true">
     <Table name="dm_twiiter" schema="public">
     </Table>
-    <Measure name="Qtd Like" column="like" aggregator="sum" visible="true">
+    <Dimension type="StandardDimension" visible="true" name="Id Twitter">
+      <Hierarchy visible="true" hasAll="true">
+        <Level name="id_twitter" visible="true" column="id_twitter" uniqueMembers="false">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Qtd Like" column="like" datatype="String" aggregator="sum" visible="true">
     </Measure>
   </Cube>
 </Schema>
