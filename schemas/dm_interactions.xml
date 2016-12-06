@@ -3,8 +3,22 @@
     <Table name="dm_interactions" schema="public">
     </Table>
     <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Id twitter">
+      <Hierarchy visible="true" hasAll="true">
+        <Level name="id_twitter" visible="true" column="id_twitter" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" name="User Liked">
+      <Hierarchy visible="true" hasAll="true">
+        <Level name="Username" visible="true" column="user_liked" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
     </Dimension>
     <Measure name="Qtd Likes" column="qtd_like" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Qtd followers" column="user_followers" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Qtd followed" column="user_following" aggregator="sum" visible="true">
     </Measure>
   </Cube>
 </Schema>

@@ -2,9 +2,45 @@
   <Cube name="dm_twitter" visible="true" cache="true" enabled="true">
     <Table name="dm_twiiter" schema="public">
     </Table>
-    <Dimension type="StandardDimension" visible="true" name="Id Twitter">
+    <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Id Twitter">
       <Hierarchy visible="true" hasAll="true">
-        <Level name="id_twitter" visible="true" column="id_twitter" uniqueMembers="false">
+        <Level name="id_twitter" visible="true" column="id_twitter" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" highCardinality="false" name="link">
+      <Hierarchy visible="true" hasAll="true">
+        <Level name="link" visible="true" column="link" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="false" name="hashtags">
+      <Hierarchy visible="true" hasAll="true">
+        <Level name="hashtags" visible="true" column="hashtags" internalType="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" name="interaction_type">
+      <Hierarchy visible="true" hasAll="true">
+        <Level name="interaction_type" visible="true" column="interaction_type" type="String" internalType="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" name="text">
+      <Hierarchy visible="true" hasAll="true">
+        <Level name="text" visible="true" column="text" type="String" uniqueMembers="false">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" name="media">
+      <Hierarchy visible="true" hasAll="true">
+        <Level name="media" visible="true" column="media" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" name="username">
+      <Hierarchy visible="true" hasAll="true">
+        <Level name="username" visible="true" column="user_origin_name" type="String" uniqueMembers="false" levelType="Regular">
         </Level>
       </Hierarchy>
     </Dimension>

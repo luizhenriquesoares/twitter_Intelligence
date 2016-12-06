@@ -304,12 +304,6 @@
         <set_empty_string>N</set_empty_string>
         </field>
       <field>
-        <name>followers</name>
-        <value>NULL</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      <field>
         <name>friends</name>
         <value>NULL</value>
         <mask/>
@@ -389,6 +383,30 @@
         </field>
       <field>
         <name>user_liked</name>
+        <value>NULL</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>location_1</name>
+        <value>NULL</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>id_twitter_1</name>
+        <value>NULL</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>user_following</name>
+        <value>NULL</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>user_followers</name>
         <value>NULL</value>
         <mask/>
         <set_empty_string>N</set_empty_string>
