@@ -1,10 +1,8 @@
 <Schema name="dm_interection">
   <Cube name="dm_interection" visible="true" cache="true" enabled="true">
-    <Table name="dm_interactions" schema="public" alias="">
+    <Table name="dm_interactions" schema="public">
     </Table>
-    <Dimension type="StandardDimension" visible="true" name="New Dimension 0">
-      <Hierarchy name="New Hierarchy 0" visible="true" hasAll="true">
-      </Hierarchy>
+    <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Id twitter">
     </Dimension>
     <Measure name="Qtd Likes" column="qtd_like" aggregator="sum" visible="true">
     </Measure>

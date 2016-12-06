@@ -156,7 +156,7 @@
         </date>
         <field>
           <name>qtd_followers</name>
-          <lookup>qtd_followers</lookup>
+          <lookup>user_followers</lookup>
           <update>Insert</update>
         </field>
         <field>
@@ -166,7 +166,7 @@
         </field>
         <field>
           <name>qtd_followed</name>
-          <lookup>qtd_followed</lookup>
+          <lookup>user_following</lookup>
           <update>Insert</update>
         </field>
         <field>
@@ -273,12 +273,6 @@
         <set_empty_string>N</set_empty_string>
         </field>
       <field>
-        <name>followers</name>
-        <value>NULL</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      <field>
         <name>friends</name>
         <value>NULL</value>
         <mask/>
@@ -362,6 +356,30 @@
         <mask/>
         <set_empty_string>N</set_empty_string>
         </field>
+      <field>
+        <name>location_1</name>
+        <value>NULL</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>id_twitter_1</name>
+        <value>NULL</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>user_following</name>
+        <value>NULL</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>user_followers</name>
+        <value>NULL</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -408,7 +426,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <fields>      <field>        <name>followers</name>
+    <fields>      <field>        <name>user_followers</name>
         <rename>qtd_followers</rename>
         <length>-2</length>
         <precision>-2</precision>
@@ -420,7 +438,7 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>friends</name>
+      </field>      <field>        <name>user_following</name>
         <rename>qtd_followed</rename>
         <length>-2</length>
         <precision>-2</precision>

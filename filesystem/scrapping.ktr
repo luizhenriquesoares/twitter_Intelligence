@@ -103,22 +103,28 @@
   <hop> <from>tweets</from><to>interprets statuses</to><enabled>Y</enabled> </hop>
   <hop> <from>interprets statuses</from><to>HTTP Client</to><enabled>Y</enabled> </hop>
   <hop> <from>HTTP Client</from><to>Add constants</to><enabled>N</enabled> </hop>
-  <hop> <from>Add constants</from><to>Extrair rea&#xe7;&#xf5;es</to><enabled>N</enabled> </hop>
+  <hop> <from>Add constants</from><to>Extrair rea&#xe7;&#xf5;es</to><enabled>Y</enabled> </hop>
   <hop> <from>Extrair rea&#xe7;&#xf5;es</from><to>projeta</to><enabled>Y</enabled> </hop>
   <hop> <from>Add constants</from><to>Dummy &#x28;do nothing&#x29;</to><enabled>Y</enabled> </hop>
   <hop> <from>HTTP Client</from><to>Dummy &#x28;do nothing&#x29;</to><enabled>Y</enabled> </hop>
   <hop> <from>Dummy &#x28;do nothing&#x29;</from><to>Select values</to><enabled>Y</enabled> </hop>
   <hop> <from>Select values</from><to>Extrair rea&#xe7;&#xf5;es</to><enabled>Y</enabled> </hop>
-  <hop> <from>projeta</from><to>Modified Java Script Value</to><enabled>N</enabled> </hop>
+  <hop> <from>projeta</from><to>Modified Java Script Value</to><enabled>Y</enabled> </hop>
   <hop> <from>Modified Java Script Value</from><to>cortar users</to><enabled>Y</enabled> </hop>
   <hop> <from>Modified Java Script Value</from><to>cortar ids</to><enabled>Y</enabled> </hop>
   <hop> <from>cortar ids</from><to>Merge Join</to><enabled>Y</enabled> </hop>
   <hop> <from>cortar users</from><to>Merge Join</to><enabled>Y</enabled> </hop>
   <hop> <from>Merge Join</from><to>projeta 2</to><enabled>Y</enabled> </hop>
   <hop> <from>projeta 2</from><to>Unique rows &#x28;HashSet&#x29;</to><enabled>Y</enabled> </hop>
-  <hop> <from>Unique rows &#x28;HashSet&#x29;</from><to>scrapping table</to><enabled>Y</enabled> </hop>
   <hop> <from>projeta</from><to>Filter rows</to><enabled>Y</enabled> </hop>
   <hop> <from>Filter rows</from><to>Modified Java Script Value</to><enabled>Y</enabled> </hop>
+  <hop> <from>Unique rows &#x28;HashSet&#x29;</from><to>Modified Java Script Value 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Modified Java Script Value 2</from><to>scrapping profile</to><enabled>Y</enabled> </hop>
+  <hop> <from>scrapping profile</from><to>Extrair rea&#xe7;&#xf5;es profile</to><enabled>Y</enabled> </hop>
+  <hop> <from>Extrair rea&#xe7;&#xf5;es profile</from><to>projeta 3</to><enabled>Y</enabled> </hop>
+  <hop> <from>projeta 3</from><to>regex </to><enabled>Y</enabled> </hop>
+  <hop> <from>regex </from><to>Select values 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Select values 2</from><to>scrapping table</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add constants</name>
@@ -147,7 +153,7 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>592</xloc>
+      <xloc>752</xloc>
       <yloc>48</yloc>
       <draw>Y</draw>
       </GUI>
@@ -166,7 +172,7 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>592</xloc>
+      <xloc>752</xloc>
       <yloc>224</yloc>
       <draw>Y</draw>
       </GUI>
@@ -234,8 +240,37 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
     </fields><clear_result_fields>N</clear_result_fields>
 <info_steps></info_steps><target_steps></target_steps><usage_parameters></usage_parameters>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>736</xloc>
+      <xloc>896</xloc>
       <yloc>48</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Filter rows</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Modified Java Script Value</send_true_to>
+<send_false_to/>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>html</leftvalue>
+ <function>&#x3c;&#x3e;</function>
+ <rightvalue/>
+ <value><name>constant</name><type>String</type><text>&#x3c;lista&#x3e;null&#x3c;&#x2f;lista&#x3e;</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>992</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -271,7 +306,7 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
     </result>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>416</xloc>
+      <xloc>576</xloc>
       <yloc>48</yloc>
       <draw>Y</draw>
       </GUI>
@@ -299,7 +334,7 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
     </keys_2>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>816</xloc>
+      <xloc>976</xloc>
       <yloc>400</yloc>
       <draw>Y</draw>
       </GUI>
@@ -335,7 +370,7 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>960</xloc>
+      <xloc>1120</xloc>
       <yloc>144</yloc>
       <draw>Y</draw>
       </GUI>
@@ -367,7 +402,7 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>736</xloc>
+      <xloc>896</xloc>
       <yloc>224</yloc>
       <draw>Y</draw>
       </GUI>
@@ -391,7 +426,7 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
         </field>      <field>        <name>id_twitter</name>
         </field>      </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>352</xloc>
+      <xloc>640</xloc>
       <yloc>400</yloc>
       <draw>Y</draw>
       </GUI>
@@ -417,7 +452,7 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
    <delimiter_is_regex>N</delimiter_is_regex>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>816</xloc>
+      <xloc>976</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
       </GUI>
@@ -443,7 +478,7 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
    <delimiter_is_regex>N</delimiter_is_regex>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>960</xloc>
+      <xloc>1120</xloc>
       <yloc>288</yloc>
       <draw>Y</draw>
       </GUI>
@@ -596,7 +631,7 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>224</xloc>
+      <xloc>384</xloc>
       <yloc>48</yloc>
       <draw>Y</draw>
       </GUI>
@@ -624,7 +659,7 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>960</xloc>
+      <xloc>1120</xloc>
       <yloc>48</yloc>
       <draw>Y</draw>
       </GUI>
@@ -652,7 +687,7 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>608</xloc>
+      <xloc>816</xloc>
       <yloc>400</yloc>
       <draw>Y</draw>
       </GUI>
@@ -690,8 +725,8 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>112</xloc>
-      <yloc>400</yloc>
+      <xloc>192</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -754,15 +789,15 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
     <sizeFieldName/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>32</xloc>
+      <xloc>192</xloc>
       <yloc>48</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Filter rows</name>
-    <type>FilterRows</type>
+    <name>Modified Java Script Value 2</name>
+    <type>ScriptValueMod</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -771,20 +806,250 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to>Modified Java Script Value</send_true_to>
-<send_false_to/>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue>html</leftvalue>
- <function>&#x3c;&#x3e;</function>
- <rightvalue/>
- <value><name>constant</name><type>String</type><text>&#x3c;lista&#x3e;null&#x3c;&#x2f;lista&#x3e;</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
-    </compare>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#x2f;&#x2f;Script here&#xd;&#xa;&#xd;&#xa;var screen_name &#x3d; screen_name&#x3b;&#xd;&#xa;&#xd;&#xa;url_twitter &#x3d; &#x27;https&#x3a;&#x2f;&#x2f;twitter.com&#x2f;&#x27;&#x3b;&#xd;&#xa;url &#x3d; url_twitter &#x2b; screen_name&#x3b;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>screen_name</name>
+        <rename>screen_name</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>url</name>
+        <rename>url</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>464</xloc>
+      <yloc>400</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>scrapping profile</name>
+    <type>HTTP</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <url/>
+    <urlInField>Y</urlInField>
+    <urlField>url</urlField>
+    <encoding/>
+    <httpLogin/>
+    <httpPassword>Encrypted </httpPassword>
+    <proxyHost/>
+    <proxyPort/>
+    <socketTimeout>10000</socketTimeout>
+    <connectionTimeout>10000</connectionTimeout>
+    <closeIdleConnectionsTime>-1</closeIdleConnectionsTime>
+    <lookup>
+    </lookup>
+    <result>
+      <name>html_profile</name>
+      <code/>
+      <response_time/>
+    </result>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>832</xloc>
-      <yloc>112</yloc>
+      <xloc>464</xloc>
+      <yloc>272</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Extrair rea&#xe7;&#xf5;es profile</name>
+    <type>UserDefinedJavaClass</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+
+    <definitions>
+        <definition>
+        <class_type>TRANSFORM_CLASS</class_type>
+
+        <class_name>Processor</class_name>
+
+        <class_source><![CDATA[
+public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws KettleException{
+	if (first){
+	  first = false;
+	}
+
+	Object[] r = getRow();
+
+	if (r == null) {
+	  setOutputDone();
+	  return false;
+	}
+
+    r = createOutputRow(r, data.outputRowMeta.size());
+
+    String html = get(Fields.In, "html_profile").getString(r);
+
+	jodd.jerry.Jerry doc = jodd.jerry.Jerry.jerry(html);
+    String lista = doc.$("div.ProfileNav").html();
+    
+    get(Fields.Out, "html_profile").setValue(r, "<lista>"+lista+"</lista>");
+
+
+    putRow(data.outputRowMeta, r);
+
+	return true;
+}
+]]></class_source>
+        </definition>
+    </definitions>
+    <fields>
+        <field>
+        <field_name> lista</field_name>
+
+        <field_type>String</field_type>
+
+        <field_length>-1</field_length>
+
+        <field_precision>-1</field_precision>
+
+        </field>
+    </fields><clear_result_fields>N</clear_result_fields>
+<info_steps></info_steps><target_steps></target_steps><usage_parameters></usage_parameters>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>464</xloc>
+      <yloc>144</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>projeta 3</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>id_twitter</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>screen_name</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>url</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>html_profile</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name> lista</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>336</xloc>
+      <yloc>144</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>regex </name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var regex &#x3d; html_profile.match&#x28;&#x2f;title&#x3d;&#x22;&#x5c;w&#x2a;&#x2f;g&#x29;&#x3b;&#xd;&#xa;&#xd;&#xa;for&#x28;x &#x3d; 0 &#x3b; x&#x3c; regex.length &#x3b; x&#x2b;&#x2b;&#x29;&#x7b;&#xd;&#xa;   regex&#x5b;x&#x5d; &#x3d; regex&#x5b;x&#x5d;.replace&#x28;&#x2f;title&#x3d;&#x22;&#x2f;g, &#x22;&#x22;&#x29;.replace&#x28;&#x27;&#x22;&#x27;, &#x27;&#x27;&#x29;&#x3b;&#xd;&#xa;    var following &#x3d; regex&#x5b;1&#x5d;&#x3b;&#xd;&#xa;    var followers &#x3d; regex&#x5b;2&#x5d;&#x3b;&#xd;&#xa;&#x7d;&#xd;&#xa;&#xd;&#xa;regex &#x3d; regex.join&#x28;&#x22;,&#x22;&#x29;&#x3b;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>regex</name>
+        <rename>regex</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>following</name>
+        <rename>following</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>followers</name>
+        <rename>followers</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>192</xloc>
+      <yloc>144</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Select values 2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>id_twitter</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>screen_name</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>following</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>followers</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>192</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

@@ -110,6 +110,160 @@
   <hop> <from>projeta</from><to>staging</to><enabled>Y</enabled> </hop>
   </order>
   <step>
+    <name>If field value is null</name>
+    <type>IfNull</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <replaceAllByValue/>
+      <replaceAllMask/>
+      <selectFields>Y</selectFields>
+      <selectValuesType>N</selectValuesType>
+      <setEmptyStringAll>N</setEmptyStringAll>
+    <valuetypes>
+      </valuetypes>
+    <fields>
+      <field>
+        <name>id_user</name>
+        <value/>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>user_origin_name</name>
+        <value>NULL</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>screen_name</name>
+        <value>NULL</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>location</name>
+        <value>NULL</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>description</name>
+        <value>NULL</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>url_profile</name>
+        <value>NULL</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>followers</name>
+        <value>NULL</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>friends</name>
+        <value>NULL</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>listed</name>
+        <value>NULL</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>time_zone</name>
+        <value>NULL</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>text</name>
+        <value>NULL</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>hashtags</name>
+        <value>NULL</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>retweet</name>
+        <value>NULL</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>created_at</name>
+        <value>NULL</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>location_1</name>
+        <value>NULL</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>media</name>
+        <value>NULL</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>link</name>
+        <value>NULL</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>favorited</name>
+        <value>NULL</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>id_twitter</name>
+        <value>NULL</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>interaction_type</name>
+        <value>NULL</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>retweet_count</name>
+        <value>NULL</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>752</xloc>
+      <yloc>32</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Merge Join</name>
     <type>MergeJoin</type>
     <description/>
@@ -314,7 +468,7 @@
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>432</xloc>
+      <xloc>416</xloc>
       <yloc>32</yloc>
       <draw>Y</draw>
       </GUI>
@@ -341,6 +495,122 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>496</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>projeta</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>id_user</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>user_origin_name</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>screen_name</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>location</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>description</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>url_profile</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>friends</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>listed</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>time_zone</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>text</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>hashtags</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>retweet</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>created_at</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>media</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>link</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>favorited</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>id_twitter</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>interaction_type</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>retweet_count</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>screen_name_1</name>
+        <rename>user_liked</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>location_1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>id_twitter_1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>following</name>
+        <rename>user_following</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>followers_1</name>
+        <rename>user_followers</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>944</xloc>
       <yloc>160</yloc>
       <draw>Y</draw>
       </GUI>
@@ -456,6 +726,44 @@
     </step>
 
   <step>
+    <name>staging</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>twitter_intelligence_ods</connection>
+    <schema/>
+    <table>staging</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>N</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>944</xloc>
+      <yloc>32</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>tweets 2</name>
     <type>JsonInput</type>
     <description/>
@@ -514,302 +822,6 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>48</xloc>
-      <yloc>32</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>If field value is null</name>
-    <type>IfNull</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <replaceAllByValue/>
-      <replaceAllMask/>
-      <selectFields>Y</selectFields>
-      <selectValuesType>N</selectValuesType>
-      <setEmptyStringAll>N</setEmptyStringAll>
-    <valuetypes>
-      </valuetypes>
-    <fields>
-      <field>
-        <name>id_user</name>
-        <value/>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      <field>
-        <name>user_origin_name</name>
-        <value>NULL</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      <field>
-        <name>screen_name</name>
-        <value>NULL</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      <field>
-        <name>location</name>
-        <value>NULL</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      <field>
-        <name>description</name>
-        <value>NULL</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      <field>
-        <name>url_profile</name>
-        <value>NULL</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      <field>
-        <name>followers</name>
-        <value>NULL</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      <field>
-        <name>friends</name>
-        <value>NULL</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      <field>
-        <name>listed</name>
-        <value>NULL</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      <field>
-        <name>time_zone</name>
-        <value>NULL</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      <field>
-        <name>text</name>
-        <value>NULL</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      <field>
-        <name>hashtags</name>
-        <value>NULL</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      <field>
-        <name>retweet</name>
-        <value>NULL</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      <field>
-        <name>created_at</name>
-        <value>NULL</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      <field>
-        <name>location_1</name>
-        <value>NULL</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      <field>
-        <name>media</name>
-        <value>NULL</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      <field>
-        <name>link</name>
-        <value>NULL</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      <field>
-        <name>favorited</name>
-        <value>NULL</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      <field>
-        <name>id_twitter</name>
-        <value>NULL</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      <field>
-        <name>interaction_type</name>
-        <value>NULL</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      <field>
-        <name>retweet_count</name>
-        <value>NULL</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>752</xloc>
-      <yloc>32</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>projeta</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>      <field>        <name>id_user</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>user_origin_name</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>screen_name</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>location</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>description</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>url_profile</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>followers</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>friends</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>listed</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>time_zone</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>text</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>hashtags</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>retweet</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>created_at</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>media</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>link</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>favorited</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>id_twitter</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>interaction_type</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>retweet_count</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>screen_name_1</name>
-        <rename>user_liked</rename>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>        <select_unspecified>N</select_unspecified>
-    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>944</xloc>
-      <yloc>160</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>staging</name>
-    <type>TableOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>twitter_intelligence_ods</connection>
-    <schema/>
-    <table>staging</table>
-    <commit>1000</commit>
-    <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>N</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>944</xloc>
       <yloc>32</yloc>
       <draw>Y</draw>
       </GUI>
