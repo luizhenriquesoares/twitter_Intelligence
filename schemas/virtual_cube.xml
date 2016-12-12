@@ -1,0 +1,30 @@
+<Schema name="dm_twitter x dm_interaction">
+  <Dimension type="StandardDimension" visible="true" foreignKey="user_liked" name="Username">
+    <Hierarchy visible="true" hasAll="true" primaryKey="user_liked">
+      <Level name="Username" visible="true" table="dm_interactions" column="user_liked" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Cube name="Twitter" visible="true" cache="true" enabled="true">
+    <Table name="dm_twiiter" schema="public" alias="">
+    </Table>
+    <DimensionUsage source="Username" name="username" visible="true" foreignKey="user_origin_name">
+    </DimensionUsage>
+    <Measure name="Qtd Like" column="like" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="Interaction" visible="true" cache="true" enabled="true">
+    <Table name="dm_interactions" schema="public" alias="">
+    </Table>
+    <DimensionUsage source="Username" name="username" visible="true" foreignKey="user_liked">
+    </DimensionUsage>
+    <Measure name="Qtd Like" column="qtd_like" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+  <VirtualCube enabled="true" name="Tweet x Interaction">
+    <VirtualCubeDimension name="Username">
+    </VirtualCubeDimension>
+    <VirtualCubeMeasure cubeName="Twitter" name="Qtd Like" visible="true">
+    </VirtualCubeMeasure>
+  </VirtualCube>
+</Schema>
