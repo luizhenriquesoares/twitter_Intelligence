@@ -1,28 +1,36 @@
 <Schema name="dm_twitter x dm_interaction">
-  <Dimension type="StandardDimension" visible="true" foreignKey="user_liked" name="Username">
+  <Dimension type="StandardDimension" visible="true" foreignKey="user_liked" highCardinality="false" name="Username">
     <Hierarchy visible="true" hasAll="true" primaryKey="user_liked">
       <Level name="Username" visible="true" table="dm_interactions" column="user_liked" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
     </Hierarchy>
   </Dimension>
+  <Dimension type="StandardDimension" visible="true" name="id_twitter">
+    <Hierarchy visible="true" hasAll="true">
+      <Level name="id_twitter" visible="true" table="dm_twiiter" column="id_twitter" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
   <Cube name="Twitter" visible="true" cache="true" enabled="true">
-    <Table name="dm_twiiter" schema="public" alias="">
+    <Table name="dm_twiiter" schema="public">
     </Table>
-    <DimensionUsage source="Username" name="username" visible="true" foreignKey="user_origin_name">
+    <DimensionUsage source="Username" name="username" visible="true" foreignKey="user_origin_name" highCardinality="false">
     </DimensionUsage>
     <Measure name="Qtd Like" column="like" aggregator="sum" visible="true">
     </Measure>
   </Cube>
   <Cube name="Interaction" visible="true" cache="true" enabled="true">
-    <Table name="dm_interactions" schema="public" alias="">
+    <Table name="dm_interactions" schema="public">
     </Table>
-    <DimensionUsage source="Username" name="username" visible="true" foreignKey="user_liked">
+    <DimensionUsage source="Username" name="username" visible="true" foreignKey="user_liked" highCardinality="false">
     </DimensionUsage>
     <Measure name="Qtd Like" column="qtd_like" aggregator="sum" visible="true">
     </Measure>
   </Cube>
-  <VirtualCube enabled="true" name="Tweet x Interaction">
-    <VirtualCubeDimension name="Username">
+  <VirtualCube enabled="true" name="Tweet x Interaction" visible="true">
+    <VirtualCubeDimension visible="true" highCardinality="false" name="Username">
+    </VirtualCubeDimension>
+    <VirtualCubeDimension name="id_twitter">
     </VirtualCubeDimension>
     <VirtualCubeMeasure cubeName="Twitter" name="Qtd Like" visible="true">
     </VirtualCubeMeasure>
