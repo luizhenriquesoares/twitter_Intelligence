@@ -14,33 +14,39 @@
         </Level>
       </Hierarchy>
     </Dimension>
-    <Dimension type="StandardDimension" visible="false" name="hashtags">
+    <Dimension type="StandardDimension" visible="false" highCardinality="false" name="hashtags">
       <Hierarchy visible="true" hasAll="true">
-        <Level name="hashtags" visible="true" column="hashtags" internalType="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        <Level name="hashtags" visible="true" column="hashtags" type="String" internalType="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
         </Level>
       </Hierarchy>
     </Dimension>
-    <Dimension type="StandardDimension" visible="true" name="interaction_type">
+    <Dimension type="StandardDimension" visible="true" highCardinality="false" name="interaction_type">
       <Hierarchy visible="true" hasAll="true">
         <Level name="interaction_type" visible="true" column="interaction_type" type="String" internalType="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
         </Level>
       </Hierarchy>
     </Dimension>
-    <Dimension type="StandardDimension" visible="true" name="text">
+    <Dimension type="StandardDimension" visible="true" highCardinality="false" name="text">
       <Hierarchy visible="true" hasAll="true">
-        <Level name="text" visible="true" column="text" type="String" uniqueMembers="false">
+        <Level name="text" visible="true" column="text" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
         </Level>
       </Hierarchy>
     </Dimension>
-    <Dimension type="StandardDimension" visible="true" name="media">
+    <Dimension type="StandardDimension" visible="true" highCardinality="false" name="media">
       <Hierarchy visible="true" hasAll="true">
         <Level name="media" visible="true" column="media" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
         </Level>
       </Hierarchy>
     </Dimension>
-    <Dimension type="StandardDimension" visible="true" name="username">
+    <Dimension type="StandardDimension" visible="true" highCardinality="false" name="username">
       <Hierarchy visible="true" hasAll="true">
-        <Level name="username" visible="true" column="user_origin_name" type="String" uniqueMembers="false" levelType="Regular">
+        <Level name="username" visible="true" column="user_origin_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" name="data_tweet">
+      <Hierarchy visible="true" hasAll="true">
+        <Level name="data_tweet" visible="true" column="data_tweet" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
         </Level>
       </Hierarchy>
     </Dimension>

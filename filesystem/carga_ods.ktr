@@ -254,6 +254,12 @@
         <mask/>
         <set_empty_string>N</set_empty_string>
         </field>
+      <field>
+        <name>data_tweet</name>
+        <value>NULL</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -330,7 +336,7 @@
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var status &#x3d; JSON.parse&#x28;status&#x29;&#x3b;&#xa;&#xd;&#xa;&#xd;&#xa;var id_twitter  &#x3d; status&#x5b;&#x22;id_str&#x22;&#x5d;&#x3b;&#xd;&#xa;var id_user     &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;id&#x22;&#x5d;&#x3b;&#xd;&#xa;var user_origin_name &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;name&#x22;&#x5d;&#x3b;&#xd;&#xa;var screen_name &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;screen_name&#x22;&#x5d;&#x3b;&#xd;&#xa;var location    &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;location&#x22;&#x5d;&#x3b;&#xd;&#xa;var description &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;description&#x22;&#x5d;&#x3b;&#xd;&#xa;var url_profile &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;url&#x22;&#x5d;&#x3b;&#xd;&#xa;var followers   &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;followers_count&#x22;&#x5d;&#x3b;&#xd;&#xa;var friends     &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;friends_count&#x22;&#x5d;&#x3b;&#xd;&#xa;var listed      &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;listed_count&#x22;&#x5d;&#x3b;&#xd;&#xa;var time_zone   &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;time_zone&#x22;&#x5d;&#x3b;&#xd;&#xa;var text        &#x3d; status&#x5b;&#x22;text&#x22;&#x5d;&#x3b;&#xd;&#xa;var link   	     &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;url&#x22;&#x5d; &#x3d;&#x3d;&#x3d; &#x27;undefined&#x27; &#x3f; &#x27;NO&#x27; &#x3a; &#x27;YES&#x27;&#xd;&#xa;var hashtags    &#x3d; typeof status&#x5b;&#x22;entities&#x22;&#x5d;&#x5b;&#x22;hashtags&#x22;&#x5d; &#x3d;&#x3d;&#x3d; &#x22;undefined&#x22; &#x3f; &#x27;NO&#x27; &#x3a; &#x27;YES&#x27;&#xd;&#xa;var retweet     &#x3d; status&#x5b;&#x22;retweet_count&#x22;&#x5d;&#x3b;&#xd;&#xa;var created_at  &#x3d; status&#x5b;&#x22;created_at&#x22;&#x5d; &#xd;&#xa;var location    &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;location&#x22;&#x5d;&#x3b;&#xd;&#xa;var favorited   &#x3d; status&#x5b;&#x22;favorite_count&#x22;&#x5d;&#x3b;&#xd;&#xa;var media &#x3d; typeof status&#x5b;&#x22;entities&#x22;&#x5d;&#x5b;&#x22;media&#x22;&#x5d; &#x3d;&#x3d;&#x3d; &#x22;undefined&#x22; &#x3f; &#x27;NO&#x27; &#x3a; &#x27;YES&#x27;&#x3b;&#xd;&#xa;var retweeted_status   &#x3d; status&#x5b;&#x22;retweeted_status&#x22;&#x5d;&#x3b;&#xd;&#xa;var retweeted_status   &#x3d; status&#x5b;&#x22;retweeted_status&#x22;&#x5d;&#x3b;&#xd;&#xa;var retweet_count &#x3d; status&#x5b;&#x22;retweet_count&#x22;&#x5d;&#x3b;&#xd;&#xa;var interaction_type  &#x3d;  &#x22;From - &#x22;&#x2b;status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;name&#x22;&#x5d;&#x3b;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;</jsScript_script>
+        <jsScript_script>function mes_convert&#x28;month_mmm&#x29;&#x7b;&#xd;&#xa;    month&#x3d;&#x5b;&#x27;Jan&#x27;,&#x27;Feb&#x27;,&#x27;Mar&#x27;,&#x27;Apr&#x27;,&#x27;May&#x27;,&#x27;Jun&#x27;,&#x27;Jul&#x27;,&#x27;Aug&#x27;,&#x27;Sep&#x27;,&#x27;Oct&#x27;,&#x27;Nov&#x27;,&#x27;Dec&#x27;&#x5d;&#x3b;&#xd;&#xa; &#xd;&#xa; var i&#x3d;0&#x3b;&#xd;&#xa; &#xd;&#xa;   while &#x28;month&#x5b;i&#x5d;&#x21;&#x3d;month_mmm&#x29;&#x7b;&#xd;&#xa;        i&#x2b;&#x3d;1&#x3b;&#xd;&#xa;   &#x7d;&#xd;&#xa;   i&#x2b;&#x3d;1&#x3b;&#xd;&#xa;   &#xd;&#xa;   if &#x28;i&#x3c;10&#x29;&#x7b;&#xd;&#xa;        return &#x27;0&#x27;&#x2b;i&#x3b;&#xd;&#xa;   &#x7d;else&#x7b;&#xd;&#xa;        return i.toString&#x28;&#x29;&#x3b;&#xd;&#xa;   &#x7d;&#xd;&#xa;   &#xd;&#xa;&#x7d;&#x3b;&#xd;&#xa;&#xd;&#xa;function date_convert&#x28;a&#x29;&#x7b;&#xd;&#xa;    var b &#x3d; a.split&#x28;&#x22; &#x22;&#x29;&#x3b;&#xd;&#xa;    var c &#x3d; &#x27;&#x27;&#x3b;&#xd;&#xa;&#xd;&#xa;    c&#x3d;b&#x5b;5&#x5d;&#x3b;&#xd;&#xa;    c&#x2b;&#x3d;&#x27;&#x2f;&#x27;&#x2b;mes_convert&#x28;b&#x5b;1&#x5d;&#x29;&#x3b;&#xd;&#xa;    c&#x2b;&#x3d;&#x27;&#x2f;&#x27;&#x2b;b&#x5b;2&#x5d;&#x3b;&#xd;&#xa;    c&#x2b;&#x3d;&#x27; &#x27;&#x2b;b&#x5b;3&#x5d;&#x3b;&#xd;&#xa;    return c&#xd;&#xa;&#xd;&#xa;&#x7d;&#xd;&#xa;	&#xd;&#xa;&#xd;&#xa;var status &#x3d; JSON.parse&#x28;status&#x29;&#x3b;&#xa;&#xd;&#xa;&#xd;&#xa;var id_twitter  &#x3d; status&#x5b;&#x22;id_str&#x22;&#x5d;&#x3b;&#xd;&#xa;var id_user     &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;id&#x22;&#x5d;&#x3b;&#xd;&#xa;var user_origin_name &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;name&#x22;&#x5d;&#x3b;&#xd;&#xa;var data_tweet  &#x3d; date_convert&#x28;status&#x5b;&#x22;created_at&#x22;&#x5d;&#x29;&#x3b;&#xd;&#xa;var screen_name &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;screen_name&#x22;&#x5d;&#x3b;&#xd;&#xa;var location    &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;location&#x22;&#x5d;&#x3b;&#xd;&#xa;var description &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;description&#x22;&#x5d;&#x3b;&#xd;&#xa;var url_profile &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;url&#x22;&#x5d;&#x3b;&#xd;&#xa;var followers   &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;followers_count&#x22;&#x5d;&#x3b;&#xd;&#xa;var friends     &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;friends_count&#x22;&#x5d;&#x3b;&#xd;&#xa;var listed      &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;listed_count&#x22;&#x5d;&#x3b;&#xd;&#xa;var time_zone   &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;time_zone&#x22;&#x5d;&#x3b;&#xd;&#xa;var text        &#x3d; status&#x5b;&#x22;text&#x22;&#x5d;&#x3b;&#xd;&#xa;var link   	     &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;url&#x22;&#x5d; &#x3d;&#x3d;&#x3d; &#x27;undefined&#x27; &#x3f; &#x27;NO&#x27; &#x3a; &#x27;YES&#x27;&#xd;&#xa;var hashtags    &#x3d; typeof status&#x5b;&#x22;entities&#x22;&#x5d;&#x5b;&#x22;hashtags&#x22;&#x5d; &#x3d;&#x3d;&#x3d; &#x22;undefined&#x22; &#x3f; &#x27;NO&#x27; &#x3a; &#x27;YES&#x27;&#xd;&#xa;var retweet     &#x3d; status&#x5b;&#x22;retweet_count&#x22;&#x5d;&#x3b;&#xd;&#xa;var created_at  &#x3d; status&#x5b;&#x22;created_at&#x22;&#x5d; &#xd;&#xa;var location    &#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;location&#x22;&#x5d;&#x3b;&#xd;&#xa;var favorited   &#x3d; status&#x5b;&#x22;favorite_count&#x22;&#x5d;&#x3b;&#xd;&#xa;var media &#x3d; typeof status&#x5b;&#x22;entities&#x22;&#x5d;&#x5b;&#x22;media&#x22;&#x5d; &#x3d;&#x3d;&#x3d; &#x22;undefined&#x22; &#x3f; &#x27;NO&#x27; &#x3a; &#x27;YES&#x27;&#x3b;&#xd;&#xa;var retweeted_status   &#x3d; status&#x5b;&#x22;retweeted_status&#x22;&#x5d;&#x3b;&#xd;&#xa;var retweeted_status   &#x3d; status&#x5b;&#x22;retweeted_status&#x22;&#x5d;&#x3b;&#xd;&#xa;var retweet_count &#x3d; status&#x5b;&#x22;retweet_count&#x22;&#x5d;&#x3b;&#xd;&#xa;var interaction_type  &#x3d;  &#x22;From - &#x22;&#x2b;status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;name&#x22;&#x5d;&#x3b;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;</jsScript_script>
       </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
         <jsScript_name>Item_0</jsScript_name>
         <jsScript_script>&#x2f;&#x2f;Script here&#xa;&#xa;</jsScript_script>
@@ -466,9 +472,15 @@
         <length>-1</length>
         <precision>-1</precision>
         <replace>N</replace>
+      </field>      <field>        <name>data_tweet</name>
+        <rename>data_tweet</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>416</xloc>
+      <xloc>400</xloc>
       <yloc>32</yloc>
       <draw>Y</draw>
       </GUI>
@@ -607,6 +619,10 @@
         <rename>user_followers</rename>
         <length>-2</length>
         <precision>-2</precision>
+      </field>      <field>        <name>data_tweet</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -712,6 +728,10 @@
         <length>-2</length>
         <precision>-2</precision>
       </field>      <field>        <name>retweet_count</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>data_tweet</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
