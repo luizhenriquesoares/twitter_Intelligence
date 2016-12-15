@@ -5,9 +5,27 @@
       </Level>
     </Hierarchy>
   </Dimension>
-  <Dimension type="StandardDimension" visible="true" name="id_twitter">
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="id_twitter">
     <Hierarchy visible="true" hasAll="true">
-      <Level name="id_twitter" visible="true" table="dm_twiiter" column="id_twitter" uniqueMembers="false">
+      <Level name="id_twitter" visible="true" table="dm_twiiter" column="id_twitter" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" name="link">
+    <Hierarchy visible="true" hasAll="true">
+      <Level name="link" visible="true" column="link" type="String" uniqueMembers="false" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" name="hashtags">
+    <Hierarchy visible="true" hasAll="true">
+      <Level name="hashtags" visible="true" column="hashtags" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" name="Time">
+    <Hierarchy visible="true" hasAll="true">
+      <Level name="Time" visible="true" column="data_tweet" uniqueMembers="false">
       </Level>
     </Hierarchy>
   </Dimension>
@@ -16,6 +34,48 @@
     </Table>
     <DimensionUsage source="Username" name="username" visible="true" foreignKey="user_origin_name" highCardinality="false">
     </DimensionUsage>
+    <Dimension type="StandardDimension" visible="true" name="link">
+      <Hierarchy visible="true" hasAll="true">
+        <Level name="link" visible="true" column="link" uniqueMembers="false">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" name="hashtags">
+      <Hierarchy visible="true" hasAll="true">
+        <Level name="hashtags" visible="true" column="hashtags" uniqueMembers="false">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" name="interaction_type">
+      <Hierarchy visible="true" hasAll="true">
+        <Level name="interaction_type" visible="true" column="interaction_type" uniqueMembers="false">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" name="text">
+      <Hierarchy visible="true" hasAll="true">
+        <Level name="text" visible="true" column="text" uniqueMembers="false">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" name="media">
+      <Hierarchy visible="true" hasAll="true">
+        <Level name="media" visible="true" column="media" uniqueMembers="false">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" name="Time">
+      <Hierarchy visible="true" hasAll="true">
+        <Level name="Time" visible="true" column="data_tweet" uniqueMembers="false">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" name="id_twitter">
+      <Hierarchy visible="true" hasAll="true">
+        <Level name="id_twitter" visible="true" column="id_twitter" uniqueMembers="false">
+        </Level>
+      </Hierarchy>
+    </Dimension>
     <Measure name="Qtd Like" column="like" aggregator="sum" visible="true">
     </Measure>
   </Cube>
@@ -24,13 +84,31 @@
     </Table>
     <DimensionUsage source="Username" name="username" visible="true" foreignKey="user_liked" highCardinality="false">
     </DimensionUsage>
+    <Dimension type="StandardDimension" visible="true" name="User Liked">
+      <Hierarchy visible="true" hasAll="true">
+        <Level name="User Liked" visible="true" column="user_liked" uniqueMembers="false">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" name="id_twiiter">
+      <Hierarchy visible="true" hasAll="true">
+        <Level name="id_twitter" visible="true" column="id_twitter" uniqueMembers="false">
+        </Level>
+      </Hierarchy>
+    </Dimension>
     <Measure name="Qtd Like" column="qtd_like" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Qtd followes" column="user_followers" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Qtd followed" column="user_following" aggregator="sum" visible="true">
     </Measure>
   </Cube>
   <VirtualCube enabled="true" name="Tweet x Interaction" visible="true">
     <VirtualCubeDimension visible="true" highCardinality="false" name="Username">
     </VirtualCubeDimension>
-    <VirtualCubeDimension name="id_twitter">
+    <VirtualCubeDimension visible="true" highCardinality="false" name="id_twitter">
+    </VirtualCubeDimension>
+    <VirtualCubeDimension name="Time">
     </VirtualCubeDimension>
     <VirtualCubeMeasure cubeName="Twitter" name="Qtd Like" visible="true">
     </VirtualCubeMeasure>

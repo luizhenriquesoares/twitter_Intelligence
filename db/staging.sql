@@ -35,12 +35,39 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: dim_time; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE dim_time (
+    start_day timestamp without time zone,
+    days_since double precision,
+    "Date" timestamp without time zone,
+    "Year" double precision,
+    "Month" double precision,
+    dayofyear double precision,
+    dayofmonth double precision,
+    dayofweek double precision,
+    weekofyear double precision,
+    dayofweekdesc text,
+    dayofweekshortdesc text,
+    monthdesc text,
+    monthshortdesc text,
+    data_string text,
+    sk_tempo double precision
+);
+
+
+ALTER TABLE dim_time OWNER TO postgres;
+
+--
 -- Name: scrapping; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE scrapping (
     id_twitter text,
-    screen_name text
+    screen_name text,
+    following double precision,
+    followers double precision
 );
 
 
@@ -57,7 +84,6 @@ CREATE TABLE staging (
     location text,
     description text,
     url_profile text,
-    followers double precision,
     friends double precision,
     listed double precision,
     time_zone text,
@@ -65,12 +91,18 @@ CREATE TABLE staging (
     hashtags text,
     retweet double precision,
     created_at text,
-    location_1 text,
     media text,
     link text,
     favorited double precision,
     id_twitter text,
-    interaction_type text
+    interaction_type text,
+    retweet_count text,
+    user_liked text,
+    location_1 text,
+    id_twitter_1 text,
+    user_following double precision,
+    user_followers double precision,
+    data_tweet text
 );
 
 
